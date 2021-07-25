@@ -7,13 +7,14 @@ repositories {
 dependencies {
     implementation 'org.testng:testng:7.4.0'
     implementation 'org.seleniumhq.selenium:selenium-java:4.0.0-beta-4'
-    implementation 'junit:junit:4.13.1'
-    implementation 'org.junit.jupiter:junit-jupiter:5.7.0'
-
+    //testImplementation 'junit:junit:4.13'
+    //testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.1'
+    //testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+    //testImplementation("org.assertj:assertj-core:3.10.0")
 }
 
 
 test {
     useTestNG()
-    useJUnitPlatform()
+    //useJUnitPlatform()
  }
