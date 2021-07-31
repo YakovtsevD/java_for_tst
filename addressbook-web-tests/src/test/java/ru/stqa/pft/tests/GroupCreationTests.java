@@ -11,7 +11,7 @@ import ru.stqa.pft.model.GroupData;
 
 public class GroupCreationTests extends TestBase {
 
-  private SessionHelper sessionHelper;
+  //private SessionHelper sessionHelper;
   @Test
   public void testGroupCreation() {
     app.getNavigationHelper().gotoGroupPage();
@@ -20,7 +20,7 @@ public class GroupCreationTests extends TestBase {
     app.getGroupHelper().submitGroupCreation();
     app.getNavigationHelper().gotoGroupPage();
     app.getNavigationHelper().gotoHomePage();
-    sessionHelper.logout();
+    //sessionHelper.logout();
   }
 
 }
