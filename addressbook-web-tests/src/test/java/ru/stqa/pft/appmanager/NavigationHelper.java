@@ -3,19 +3,18 @@ package ru.stqa.pft.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class NavigationHelper {
+public class NavigationHelper extends HelperBase {
 
-  private FirefoxDriver wd = new FirefoxDriver();
+  //private FirefoxDriver wd = new FirefoxDriver();
   public NavigationHelper(FirefoxDriver wd) {
-    this.wd = wd;
+    super(wd);
   }
 
-
   public void gotoHomePage() {
-    wd.findElement(By.linkText("home")).click();
+    click(By.linkText("home"));
   }
 
   public void gotoGroupPage() {
-    wd.findElement(By.linkText("groups")).click();
+    click(By.linkText("groups"));
   }
 }
