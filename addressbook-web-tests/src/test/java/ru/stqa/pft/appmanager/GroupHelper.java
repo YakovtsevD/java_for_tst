@@ -1,11 +1,12 @@
 package ru.stqa.pft.appmanager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.stqa.pft.model.GroupData;
 
 public class GroupHelper extends  HelperBase {
-  public GroupHelper(FirefoxDriver wd) {
+  public GroupHelper(WebDriver wd) {
     super(wd);
   }
 
@@ -26,7 +27,8 @@ public class GroupHelper extends  HelperBase {
   }
 
   public void deleteSelectedGroups() {
-    click(By.cssSelector("input:nth-child(8)"));
+    //click(By.cssSelector("input:nth-child(8)"));
+    click(By.name("delete"));
   }
 
   public void selectGroup() {
@@ -34,10 +36,10 @@ public class GroupHelper extends  HelperBase {
   }
 
   public void initGroupModification() {
-    click(By.name("edit[]"));
+    click(By.name("edit"));
   }
 
   public void submitGroupModification() {
-    click(By.name("update[]"));
+    click(By.name("update"));
   }
 }

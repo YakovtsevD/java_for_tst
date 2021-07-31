@@ -1,11 +1,12 @@
 package ru.stqa.pft.appmanager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class SessionHelper extends HelperBase {
   //private FirefoxDriver wd = new FirefoxDriver();
-  public SessionHelper(FirefoxDriver wd) {
+  public SessionHelper(WebDriver wd) {
     super(wd);
     //this.wd = wd;
   }
