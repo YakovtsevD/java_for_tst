@@ -25,11 +25,11 @@ public class ApplicationManager {
 
   public void init() {
     //String browser = BrowserType.FIREFOX;
-    if (browser == BrowserType.FIREFOX) {
+    if (browser.equals(BrowserType.FIREFOX)) {
       wd = new FirefoxDriver();
-    } else if (browser == BrowserType.CHROME) {
+    } else if (browser.equals(BrowserType.CHROME)) {
       wd = new ChromeDriver();
-    } else if (browser == BrowserType.IE) {
+    } else if (browser.equals(BrowserType.IE)) {
       wd = new InternetExplorerDriver();
     }
     wd.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
