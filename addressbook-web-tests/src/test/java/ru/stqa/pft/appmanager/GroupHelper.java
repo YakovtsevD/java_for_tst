@@ -38,4 +38,25 @@ public class GroupHelper extends  HelperBase {
   public void submitGroupModification() {
     click(By.name("update"));
   }
+
+  public void returnToGroupPage() {
+    if (isElementPresent(By.tagName("h1"))   //если есть тэг заголовок h1
+            && wd.findElement(By.tagName("h1")).getText().equals("Groups")   //и если есть тэг заголовок h1 с названием Groups
+            && isElementPresent(By.name("new")))   //и если есть элемент new
+    {
+      return;
+    }
+    click(By.linkText("groups"));
+  }
+
+  public void createGroup(GroupData group) {
+    initGroupCreation();
+    fillGroupForm(group);
+    submitGroupCreation();
+    returnToGroupPage();
+  }
+
+  public boolean isThereAGroup() {
+    return isElementPresent(By.name("selected[]"));
+  }
 }
