@@ -1,7 +1,11 @@
 package ru.stqa.pft.appmanager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import ru.stqa.pft.model.ContactData;
 
 public class ContactHelper extends HelperBase {
@@ -14,10 +18,16 @@ public class ContactHelper extends HelperBase {
     click(By.cssSelector("input:nth-child(87)"));
   }
 
-  public void fillContactForm(ContactData contactData) {
+  public void fillContactForm(ContactData contactData, boolean creation) {
     type(By.name("firstname"), contactData.getFirstname());
     type(By.name("lastname"), contactData.getLastname());
     type(By.name("email"), contactData.getEmail());
+
+    if (creation) {
+      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup()); //выбор элементов из выпадающено списка
+    } else {
+      Assert.assertFalse(isElementPresent(By.name("new_group")));
+    }
   }
 
   public void initContactCreation() {

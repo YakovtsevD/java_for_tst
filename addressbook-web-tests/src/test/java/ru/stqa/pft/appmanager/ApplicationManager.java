@@ -30,7 +30,7 @@ public class ApplicationManager {
     } else if (browser.equals(BrowserType.IE)) {
       wd = new InternetExplorerDriver();
     }
-    wd.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
+    wd.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
     wd.get("http://localhost/addressbook/");
     wd.manage().window().setSize(new Dimension(800, 640));
     groupHelper = new GroupHelper(wd);
