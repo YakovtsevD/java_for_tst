@@ -1,6 +1,5 @@
 package ru.stqa.pft.tests;
 
-import org.openqa.selenium.devtools.v85.browser.Browser;
 import org.openqa.selenium.remote.BrowserType;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;

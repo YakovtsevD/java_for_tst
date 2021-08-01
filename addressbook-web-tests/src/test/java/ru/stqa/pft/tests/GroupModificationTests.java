@@ -12,9 +12,10 @@ public class GroupModificationTests extends TestBase {
     app.getGroupHelper().initGroupModification();
     app.getGroupHelper().fillGroupForm(new GroupData("newgroup2", "header22", "footer2"));
     //если не надо заполнять все значения
-    app.getGroupHelper().fillGroupForm(new GroupData("newgroup2", null, null));
+    //app.getGroupHelper().fillGroupForm(new GroupData("newgroup2", null, null));
     app.getGroupHelper().submitGroupModification();
     app.getNavigationHelper().gotoGroupPage();
-    app.getNavigationHelper().gotoHomePage();
+    app.getNavigationHelper().gotoHome();
+    app.getSessionHelper().logout();
   }
 }
