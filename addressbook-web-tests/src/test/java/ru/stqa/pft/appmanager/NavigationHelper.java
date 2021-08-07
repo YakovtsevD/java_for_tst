@@ -22,7 +22,7 @@ public class NavigationHelper extends HelperBase {
     if (isElementPresent(By.id("maintable"))) {
       return;
     }
-    click(By.linkText("home"));
+    click(By.linkText("HOME"));
   }
 
   public void gotoGroupPage() {
@@ -33,6 +33,6 @@ public class NavigationHelper extends HelperBase {
     {
       return;
     }
-    click(By.linkText("groups"));
+    click(By.linkText("GROUPS"));
   }
 }

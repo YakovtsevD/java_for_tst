@@ -15,7 +15,8 @@ public class ContactHelper extends HelperBase {
   }
 
   public void submitContactCreation() {
-    click(By.cssSelector("input:nth-child(87)"));
+    //click(By.cssSelector("input:nth-child(87)"));
+    click(By.name("submit"));
   }
 
   public void fillContactForm(ContactData contactData, boolean creation) {
@@ -30,7 +31,7 @@ public class ContactHelper extends HelperBase {
   }
 
   public void initContactCreation() {
-    click(By.linkText("add new"));
+    click(By.linkText("ADD_NEW"));
   }
 
   public void closeAlert() {
