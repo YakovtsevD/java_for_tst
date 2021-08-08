@@ -4,6 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.model.GroupData;
 
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class GroupCreationTests extends TestBase {
     List<GroupData> before = app.getGroupHelper().getGroupList();
     //int before = app.getGroupHelper().getGroupCount();
     app.getGroupHelper().initGroupCreation();
-    GroupData group = new GroupData("newgroup404", "header404", "foottter404");
+    GroupData group = new GroupData("newgroup505", "header505", "foottter505");
     app.getGroupHelper().fillGroupForm(group);
     //app.getGroupHelper().fillGroupForm(new GroupData("newgroup111", null, null));
     app.getGroupHelper().submitGroupCreation();
@@ -29,13 +30,19 @@ public class GroupCreationTests extends TestBase {
     //т.к. после создания порядок групп может измениться из-за сортировки по наименования, сравнивать надо неупорядоченные множества
     //чтобы сравнить до и после, в списке before мы должны добавить значение аналогичное тому, что добавляем в тесте
     // предварительно вычисляем id - считаем его максимальным в списке after
+    /*
     int max = 0;
     for (GroupData g : after) {
       if (g.getId()>max) {
         max=g.getId();
       }
     }
-    group.setId(max);
+    */
+    //Comparator<? super GroupData> byId = (Comparator<GroupData>) (o1, o2) -> Integer.compare(o1.getId(), o2.getId());
+    // лямбда выражения поиска максимального id
+    //int max = after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId();
+
+    group.setId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());
     before.add(group);
     Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
 
