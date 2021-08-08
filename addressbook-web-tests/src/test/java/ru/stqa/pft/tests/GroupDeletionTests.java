@@ -5,6 +5,8 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.appmanager.SessionHelper;
 import ru.stqa.pft.model.GroupData;
 
+import java.util.List;
+
 public class GroupDeletionTests extends TestBase {
 
   @Test
@@ -13,12 +15,15 @@ public class GroupDeletionTests extends TestBase {
     if (! app.getGroupHelper().isThereAGroup()) { //проверка есть ли группы, если нет - создание
       app.getGroupHelper().createGroup(new GroupData("test1", "header1", "footer1"));
     }
-    int before = app.getGroupHelper().getGroupCount(); // проверка количества групп до удаления
-    app.getGroupHelper().selectGroup(before-2);  // выбираем группу номер (по поряд. номеру) 3
+    //int before = app.getGroupHelper().getGroupCount(); // проверка количества групп до удаления
+    List<GroupData> before = app.getGroupHelper().getGroupList();
+    app.getGroupHelper().selectGroup(before.size()-2);  // выбираем группу номер (по поряд. номеру) 3
     app.getGroupHelper().deleteSelectedGroups(); // удаляем
     app.getNavigationHelper().gotoGroupPage(); // на страницу групп
-    int after = app.getGroupHelper().getGroupCount(); // проверка количества групп после удаления
-    Assert.assertEquals(after, before-1); // проверка что групп стало меньше на 1
+    //int after = app.getGroupHelper().getGroupCount(); // проверка количества групп после удаления
+    List<GroupData> after = app.getGroupHelper().getGroupList();
+    //Assert.assertEquals(after, before-1); // проверка что групп стало меньше на 1
+    Assert.assertEquals(after.size(), before.size()-1);
     app.getNavigationHelper().gotoHome(); // на страницу хоум
     app.getSessionHelper().logout(); // разлогин
   }
