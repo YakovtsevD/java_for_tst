@@ -15,9 +15,9 @@ public class GroupModificationTests extends TestBase {
     if (! app.getGroupHelper().isThereAGroup()) {
       app.getGroupHelper().createGroup(new GroupData("test1", "header1", "footer1"));
     }
-    app.getGroupHelper().selectGroup();
+    app.getGroupHelper().selectGroup(2);
     app.getGroupHelper().initGroupModification();
-    app.getGroupHelper().fillGroupForm(new GroupData("newgroup2", "header22", "footer2"));
+    app.getGroupHelper().fillGroupForm(new GroupData("newgroup5", "header5", "footer5"));
     //app.getGroupHelper().fillGroupForm(new GroupData("newgroup2", null, null));     //если не надо заполнять все значения
     app.getGroupHelper().submitGroupModification();
     app.getNavigationHelper().gotoGroupPage();

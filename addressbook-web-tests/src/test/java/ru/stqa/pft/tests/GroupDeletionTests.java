@@ -9,22 +9,18 @@ public class GroupDeletionTests extends TestBase {
 
   @Test
   public void testGroupDeletion() {
-    app.getNavigationHelper().gotoGroupPage();
-    // проверка количества групп до ввода новой
-    int before = app.getGroupHelper().getGroupCount();
-    if (! app.getGroupHelper().isThereAGroup()) {
+    app.getNavigationHelper().gotoGroupPage(); // на страницу групп
+    if (! app.getGroupHelper().isThereAGroup()) { //проверка есть ли группы, если нет - создание
       app.getGroupHelper().createGroup(new GroupData("test1", "header1", "footer1"));
     }
-    app.getGroupHelper().selectGroup();
-    app.getGroupHelper().deleteSelectedGroups();
-    app.getNavigationHelper().gotoGroupPage();
-
-    // проверка количества групп после ввода новой
-    int after = app.getGroupHelper().getGroupCount();
-    Assert.assertEquals(after, before-1);
-
-    app.getNavigationHelper().gotoHome();
-    app.getSessionHelper().logout();
+    int before = app.getGroupHelper().getGroupCount(); // проверка количества групп до удаления
+    app.getGroupHelper().selectGroup(before-2);  // выбираем группу номер (по поряд. номеру) 3
+    app.getGroupHelper().deleteSelectedGroups(); // удаляем
+    app.getNavigationHelper().gotoGroupPage(); // на страницу групп
+    int after = app.getGroupHelper().getGroupCount(); // проверка количества групп после удаления
+    Assert.assertEquals(after, before-1); // проверка что групп стало меньше на 1
+    app.getNavigationHelper().gotoHome(); // на страницу хоум
+    app.getSessionHelper().logout(); // разлогин
   }
 
 }
