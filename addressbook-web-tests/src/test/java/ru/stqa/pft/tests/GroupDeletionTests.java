@@ -24,6 +24,17 @@ public class GroupDeletionTests extends TestBase {
     List<GroupData> after = app.getGroupHelper().getGroupList();
     //Assert.assertEquals(after, before-1); // проверка что групп стало меньше на 1
     Assert.assertEquals(after.size(), before.size()-1);
+
+    before.remove(before.size()-2); // удаляем из списка before элемент, который удалили в тесте, чтобы списки до и после стали одинаковыми
+    //теперь проверка что списки действительно одинаковые
+    /*
+    for (int i = 0; i < after.size(); i++) {
+      Assert.assertEquals(before.get(i), after.get(i)); //сравниваем соответсвующие элементы списка
+    }
+    */
+    //для сравнения объектов цикл не нужен, тестовый фреймворк умеет сравнивать списки целиком
+    Assert.assertEquals(before, after);
+
     app.getNavigationHelper().gotoHome(); // на страницу хоум
     app.getSessionHelper().logout(); // разлогин
   }
