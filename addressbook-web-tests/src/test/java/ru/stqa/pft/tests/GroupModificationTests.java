@@ -29,7 +29,8 @@ public class GroupModificationTests extends TestBase {
     List<GroupData> after = app.getGroupHelper().getGroupList();
     //Assert.assertEquals(after, before);
     Assert.assertEquals(after.size(), before.size());
-    //т.к. после модификации
+
+    //т.к. после модификации порядок групп может измениться из-за сортировки по наименования, сравнивать надо неупорядоченные множества
     before.remove(2);
     before.add(group);
     Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
