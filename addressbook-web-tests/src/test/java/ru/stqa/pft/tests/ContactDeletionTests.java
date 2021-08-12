@@ -21,8 +21,8 @@ public class ContactDeletionTests extends TestBase {
     //assertThat(driver.switchTo().alert().getText(), is("Delete 1 addresses?"));
     app.getContactHelper().closeAlert();
     app.getNavigationHelper().gotoHome();
-    List<ContactData> after = app.getContactHelper().getContactList();
 
+    List<ContactData> after = app.getContactHelper().getContactList();
     Assert.assertEquals(after.size(), before.size()-1); // проверка что записей стало меньше на 1
 
     // проверка что остались нужные записи

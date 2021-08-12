@@ -56,8 +56,11 @@ public class ContactHelper extends HelperBase {
     click(By.name("update"));
   }
 
-  public void initContactModification() {
-    click(By.cssSelector("tr:nth-child(2) > .center:nth-child(8) img"));
+  public void initContactModification(int index) {
+    wd.findElements(By.cssSelector("td:nth-child(8)")).get(index).click();
+
+    //click(By.cssSelector("tr:nth-child(2) > .center:nth-child(8) img"));
+
   }
 
   public void createContact(ContactData contact, boolean b) {
