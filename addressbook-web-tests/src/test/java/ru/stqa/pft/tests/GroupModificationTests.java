@@ -1,13 +1,19 @@
 package ru.stqa.pft.tests;
 
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.model.GroupData;
+import ru.stqa.pft.model.Groups;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
+
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.*;
 
 public class GroupModificationTests extends TestBase {
 
@@ -25,29 +31,24 @@ public class GroupModificationTests extends TestBase {
 
     app.goTo().GroupPage();
 
-    //int before = app.getGroupHelper().getGroupCount();    // проверка количества групп до модификации
-    Set<GroupData> before = app.group().all();
+    Groups before = app.group().all();
     GroupData modifiedGroup = before.iterator().next();
-    //int index = before.size()-3;  // определяем номер элемента для модификации
-    GroupData group = new GroupData().withId(modifiedGroup.getId()).withName("test6").withHeader("header6").withFooter("footer6");
-
+    GroupData group = new GroupData()
+            .withId(modifiedGroup.getId()).withName("modgroup6").withHeader("header6").withFooter("footer6");
     app.group().modify(group);
-
-    // проверка количества групп после ввода новой
-    //int after = app.getGroupHelper().getGroupCount();
-    //Assert.assertEquals(after, before);
-    Set<GroupData> after = app.group().all();
+    Groups after = app.group().all();
     Assert.assertEquals(after.size(), before.size());
 
     //т.к. после модификации порядок групп может измениться из-за сортировки по наименования, сравнивать надо неупорядоченные множества
-    before.remove(modifiedGroup);
+    //before.remove(modifiedGroup);
     before.add(group);
     //Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after)); // это сравнение неупорядоченных списков
     //сравнение сортированных списков
     //Comparator<? super GroupData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
     //before.sort(byId);
     //after.sort(byId);
-    Assert.assertEquals(before, after);
+    //Assert.assertEquals(before, after);
+    assertThat(after, equalTo(before.without(modifiedGroup)));
 
     app.goTo().gotoHome();
     //app.getSessionHelper().logout();
