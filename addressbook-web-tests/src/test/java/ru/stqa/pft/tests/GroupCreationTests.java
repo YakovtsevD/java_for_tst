@@ -23,11 +23,12 @@ public class GroupCreationTests extends TestBase {
     //Set<GroupData> before = app.group().all(); // список групп до создания новой
     Groups before = app.group().all(); // список групп до создания новой
     /*
-    for (int i = 202; i < 222; i++) {
+    for (int i = 404; i < 444; i++) {
       GroupData group = new GroupData().withName("newgroup"+i).withHeader("header"+i).withFooter("foottter"+i);
       app.group().create(group); // создание группы
     }
     */
+
     GroupData group = new GroupData().withName("newgroup505").withHeader("header505").withFooter("foottter505");
     app.group().create(group); // создание группы
 
