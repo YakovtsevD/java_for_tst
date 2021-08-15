@@ -25,7 +25,7 @@ public class NavigationHelper extends HelperBase {
     click(By.linkText("HOME"));
   }
 
-  public void gotoGroupPage() {
+  public void GroupPage() {
 
     if (isElementPresent(By.tagName("h1"))   //если есть тэг заголовок h1
             //&& wd.findElement(By.tagName("h1")).getText().equals("GROUPS")   //и если есть тэг заголовок h1 с названием GROUPS

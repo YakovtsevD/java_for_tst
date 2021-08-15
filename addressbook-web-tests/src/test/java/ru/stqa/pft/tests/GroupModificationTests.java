@@ -6,35 +6,35 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.model.GroupData;
 
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 
 public class GroupModificationTests extends TestBase {
 
   @BeforeMethod  // перед каждым тестом в классе будет проверка есть ли группа (с созданием, если групп нет)
   public void ensurePreConditions() {
-    app.getNavigationHelper().gotoGroupPage();
-    if (! app.getGroupHelper().isThereAGroup()) {
-      app.getGroupHelper().createGroup(new GroupData("test1", "header1", "footer1"));
+    app.goTo().GroupPage();
+    //if (! app.group().isThereAGroup()) {
+    if (app.group().list().size()==0) {
+      app.group().create(new GroupData("test1", "header1", "footer1"));
     }
   }
 
   @Test
   public void testGroupModification() {
 
-    app.getNavigationHelper().gotoGroupPage();
+    app.goTo().GroupPage();
 
     //int before = app.getGroupHelper().getGroupCount();    // проверка количества групп до модификации
-    List<GroupData> before = app.getGroupHelper().getGroupList();
+    List<GroupData> before = app.group().list();
     int index = before.size()-3;  // определяем номер элемента для модификации
     GroupData group = new GroupData(before.get(index).getId(),"newgroup6", "header6", "footer6");
 
-    app.getGroupHelper().modifyGroup(group, index);
+    app.group().modify(group, index);
 
     // проверка количества групп после ввода новой
     //int after = app.getGroupHelper().getGroupCount();
     //Assert.assertEquals(after, before);
-    List<GroupData> after = app.getGroupHelper().getGroupList();
+    List<GroupData> after = app.group().list();
     Assert.assertEquals(after.size(), before.size());
 
     //т.к. после модификации порядок групп может измениться из-за сортировки по наименования, сравнивать надо неупорядоченные множества
@@ -47,7 +47,7 @@ public class GroupModificationTests extends TestBase {
     after.sort(byId);
     Assert.assertEquals(before, after);
 
-    app.getNavigationHelper().gotoHome();
+    app.goTo().gotoHome();
     //app.getSessionHelper().logout();
   }
 

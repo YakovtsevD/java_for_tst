@@ -55,19 +55,25 @@ public class GroupHelper extends  HelperBase {
     click(By.linkText("group page"));
   }
 
-  public void createGroup(GroupData group) {
+  public void create(GroupData group) {
     initGroupCreation();
     fillGroupForm(group);
     submitGroupCreation();
     returnToGroupPage();
   }
 
-  public void modifyGroup(GroupData group, int index) {
+  public void modify(GroupData group, int index) {
     selectGroup(index);
     initGroupModification();
     fillGroupForm(group);
     submitGroupModification();
     returnToGroupPage();
+  }
+
+  public void delete(int index) {
+    selectGroup(index);  // выбираем группу номер (по поряд. номеру) 3
+    deleteSelectedGroups(); // удаляем
+    returnToGroupPage(); // на страницу групп
   }
 
   public boolean isThereAGroup() {
@@ -78,7 +84,7 @@ public class GroupHelper extends  HelperBase {
     return wd.findElements(By.name("selected[]")).size();
     }
 
-  public List<GroupData> getGroupList() {
+  public List<GroupData> list() {
     List<GroupData> groups = new ArrayList<GroupData>();
     List<WebElement> elements = wd.findElements(By.cssSelector("span.group")); //найти все элементы с тэгом span и классом group
     for (WebElement element : elements) {

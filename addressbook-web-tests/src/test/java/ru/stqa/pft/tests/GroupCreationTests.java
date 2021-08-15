@@ -5,25 +5,22 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.model.GroupData;
 
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 
 public class GroupCreationTests extends TestBase {
 
   @Test
   public void testGroupCreation() {
-    app.getNavigationHelper().gotoGroupPage();
+    app.goTo().GroupPage();
     // проверка количества групп до ввода новой
-    List<GroupData> before = app.getGroupHelper().getGroupList();
-    //int before = app.getGroupHelper().getGroupCount();
-    app.getGroupHelper().initGroupCreation();
+    List<GroupData> before = app.group().list();
     GroupData group = new GroupData("newgroup505", "header505", "foottter505");
-    app.getGroupHelper().fillGroupForm(group);
-    //app.getGroupHelper().fillGroupForm(new GroupData("newgroup111", null, null));
-    app.getGroupHelper().submitGroupCreation();
-    app.getNavigationHelper().gotoGroupPage();
+    //int before = app.getGroupHelper().getGroupCount();
+
+    app.group().create(group);
+
     // проверка количества групп после ввода новой
-    List<GroupData> after = app.getGroupHelper().getGroupList();
+    List<GroupData> after = app.group().list();
     //int after = app.getGroupHelper().getGroupCount();
     Assert.assertEquals(after.size(), before.size()+1);
 
@@ -53,7 +50,7 @@ public class GroupCreationTests extends TestBase {
     //если сравнение идентифиактора id не важно, можно убрать его из equals, а в конструкторе исправить int id = Integer.MAX_VALUE,
     // тогда при сортировке всегда будет в конце списка и максимум вычислять не надо
 
-    app.getNavigationHelper().gotoHome();
+    app.goTo().gotoHome();
     //app.getSessionHelper().logout();
   }
 
