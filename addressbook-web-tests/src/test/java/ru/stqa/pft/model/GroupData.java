@@ -2,15 +2,11 @@ package ru.stqa.pft.model;
 
 public class GroupData {
   private int id;
+  private String name;
+  private String header;
+  private String footer;
 
-  public void setId(int id) {
-    this.id = id;
-  }
-
-  private final String name;
-  private final String header;
-  private final String footer;
-
+  /*
   public GroupData(int id, String name, String header, String footer) {
     this.id = id;
     this.name = name;
@@ -23,6 +19,27 @@ public class GroupData {
     this.name = name;
     this.header = header;
     this.footer = footer;
+  }
+  */
+
+  public GroupData withId(int id) {
+    this.id = id;
+    return this;
+  }
+
+  public GroupData withName(String name) {
+    this.name = name;
+    return this;
+  }
+
+  public GroupData withHeader(String header) {
+    this.header = header;
+    return this;
+  }
+
+  public GroupData withFooter(String footer) {
+    this.footer = footer;
+    return this;
   }
 
   public String getName() {

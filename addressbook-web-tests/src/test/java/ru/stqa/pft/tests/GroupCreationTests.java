@@ -14,7 +14,7 @@ public class GroupCreationTests extends TestBase {
     app.goTo().GroupPage();
     // проверка количества групп до ввода новой
     List<GroupData> before = app.group().list();
-    GroupData group = new GroupData("newgroup505", "header505", "foottter505");
+    GroupData group = new GroupData().withName("newgroup505").withHeader("header505").withFooter("foottter505");
     //int before = app.getGroupHelper().getGroupCount();
 
     app.group().create(group);
@@ -39,7 +39,7 @@ public class GroupCreationTests extends TestBase {
     // лямбда выражения поиска максимального id
     //int max = after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId();
 
-    group.setId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());
+    group.withId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());
     before.add(group);
     //Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
     //сортировка и сравнение упорядоченных списков
