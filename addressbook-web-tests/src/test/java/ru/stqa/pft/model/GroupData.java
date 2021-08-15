@@ -54,8 +54,13 @@ public class GroupData {
     return footer;
   }
 
+  public int getId() {
+    return id;
+  }
+
   //---
   // переопределение стандартных методов под работу с объектами GroupData
+
   @Override
   public String toString() {
     return "GroupData{" +
@@ -63,6 +68,8 @@ public class GroupData {
             ", name='" + name + '\'' +
             '}';
   }  // чтоб читались логи
+  //---
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -72,16 +79,13 @@ public class GroupData {
 
     if (id != groupData.id) return false;
     return name != null ? name.equals(groupData.name) : groupData.name == null;
-  }  // для сревнения объектов
+  }
+
   @Override
   public int hashCode() {
     int result = id;
     result = 31 * result + (name != null ? name.hashCode() : 0);
     return result;
-  }  // для сревнения объектов
-  //---
-
-  public int getId() {
-    return id;
   }
+
 }

@@ -6,6 +6,7 @@ import ru.stqa.pft.model.GroupData;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 public class GroupCreationTests extends TestBase {
 
@@ -13,14 +14,14 @@ public class GroupCreationTests extends TestBase {
   public void testGroupCreation() {
     app.goTo().GroupPage();
     // проверка количества групп до ввода новой
-    List<GroupData> before = app.group().list();
+    Set<GroupData> before = app.group().all();
     GroupData group = new GroupData().withName("newgroup505").withHeader("header505").withFooter("foottter505");
     //int before = app.getGroupHelper().getGroupCount();
 
     app.group().create(group);
 
     // проверка количества групп после ввода новой
-    List<GroupData> after = app.group().list();
+    Set<GroupData> after = app.group().all();
     //int after = app.getGroupHelper().getGroupCount();
     Assert.assertEquals(after.size(), before.size()+1);
 
@@ -39,13 +40,14 @@ public class GroupCreationTests extends TestBase {
     // лямбда выражения поиска максимального id
     //int max = after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId();
 
-    group.withId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());
+    //group.withId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());
+    group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt());
     before.add(group);
     //Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
     //сортировка и сравнение упорядоченных списков
-    Comparator<? super GroupData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
-    before.sort(byId);
-    after.sort(byId);
+    //Comparator<? super GroupData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
+    //before.sort(byId);
+    //after.sort(byId);
     Assert.assertEquals(before, after);
     //если сравнение идентифиактора id не важно, можно убрать его из equals, а в конструкторе исправить int id = Integer.MAX_VALUE,
     // тогда при сортировке всегда будет в конце списка и максимум вычислять не надо

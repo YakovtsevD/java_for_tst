@@ -6,7 +6,9 @@ import org.openqa.selenium.WebElement;
 import ru.stqa.pft.model.GroupData;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class GroupHelper extends  HelperBase {
 
@@ -34,7 +36,9 @@ public class GroupHelper extends  HelperBase {
 
   public void selectGroup(int index) {
     wd.findElements(By.name("selected[]")).get(index).click();
-    //click(By.name("selected[]"));  //клик уже сделан выше
+  }
+  private void selectGroupById(int id) {
+    wd.findElement(By.cssSelector("input[value='"+ id +"']")).click();
   }
 
   public void initGroupModification() {
@@ -62,8 +66,8 @@ public class GroupHelper extends  HelperBase {
     returnToGroupPage();
   }
 
-  public void modify(GroupData group, int index) {
-    selectGroup(index);
+  public void modify(GroupData group) {
+    selectGroupById(group.getId());
     initGroupModification();
     fillGroupForm(group);
     submitGroupModification();
@@ -74,6 +78,12 @@ public class GroupHelper extends  HelperBase {
     selectGroup(index);  // выбираем группу номер (по поряд. номеру) 3
     deleteSelectedGroups(); // удаляем
     returnToGroupPage(); // на страницу групп
+  }
+  public void delete(GroupData group) {
+    selectGroupById(group.getId());  // выбираем группу номер (по поряд. номеру) 3
+    deleteSelectedGroups(); // удаляем
+    returnToGroupPage(); // на страницу групп
+
   }
 
   public boolean isThereAGroup() {
@@ -94,4 +104,15 @@ public class GroupHelper extends  HelperBase {
     }
     return groups;
   }
+  public Set<GroupData> all() {
+    Set<GroupData> groups = new HashSet<>();
+    List<WebElement> elements = wd.findElements(By.cssSelector("span.group")); //найти все элементы с тэгом span и классом group
+    for (WebElement element : elements) {
+      String name = element.getText();
+      int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+      groups.add(new GroupData().withId(id).withName(name));
+    }
+    return groups;
+  }
+
 }
