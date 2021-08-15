@@ -36,7 +36,7 @@ public class GroupDeletionTests extends TestBase {
     Assert.assertEquals(before, after);
 
     app.getNavigationHelper().gotoHome(); // на страницу хоум
-    app.getSessionHelper().logout(); // разлогин
+    //app.getSessionHelper().logout(); // разлогин
   }
 
 }

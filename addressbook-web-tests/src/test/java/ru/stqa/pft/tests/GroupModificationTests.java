@@ -42,6 +42,6 @@ public class GroupModificationTests extends TestBase {
     Assert.assertEquals(before, after);
 
     app.getNavigationHelper().gotoHome();
-    app.getSessionHelper().logout();
+    //app.getSessionHelper().logout();
   }
 }

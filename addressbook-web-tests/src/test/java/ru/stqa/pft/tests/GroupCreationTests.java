@@ -54,7 +54,7 @@ public class GroupCreationTests extends TestBase {
     // тогда при сортировке всегда будет в конце списка и максимум вычислять не надо
 
     app.getNavigationHelper().gotoHome();
-    app.getSessionHelper().logout();
+    //app.getSessionHelper().logout();
   }
 
 }
