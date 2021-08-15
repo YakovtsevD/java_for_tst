@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GroupHelper extends  HelperBase {
+
   public GroupHelper(WebDriver wd) {
     super(wd);
   }
@@ -46,18 +47,26 @@ public class GroupHelper extends  HelperBase {
 
   public void returnToGroupPage() {
     if (isElementPresent(By.tagName("h1"))   //если есть тэг заголовок h1
-            && wd.findElement(By.tagName("h1")).getText().equals("Groups")   //и если есть тэг заголовок h1 с названием Groups
+            //&& wd.findElement(By.tagName("h1")).getText().equals("GROUPS")   //и если есть тэг заголовок h1 с названием GROUPS
             && isElementPresent(By.name("new")))   //и если есть элемент new
     {
       return;
     }
-    click(By.linkText("groups"));
+    click(By.linkText("group page"));
   }
 
   public void createGroup(GroupData group) {
     initGroupCreation();
     fillGroupForm(group);
     submitGroupCreation();
+    returnToGroupPage();
+  }
+
+  public void modifyGroup(GroupData group, int index) {
+    selectGroup(index);
+    initGroupModification();
+    fillGroupForm(group);
+    submitGroupModification();
     returnToGroupPage();
   }
 

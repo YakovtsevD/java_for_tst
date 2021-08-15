@@ -28,11 +28,15 @@ public class NavigationHelper extends HelperBase {
   public void gotoGroupPage() {
 
     if (isElementPresent(By.tagName("h1"))   //если есть тэг заголовок h1
-            && wd.findElement(By.tagName("h1")).getText().equals("Groups")   //и если есть тэг заголовок h1 с названием Groups
+            //&& wd.findElement(By.tagName("h1")).getText().equals("GROUPS")   //и если есть тэг заголовок h1 с названием GROUPS
+            //&& wd.findElement(By.cssSelector("#content")).getText().equals("GROUPS")   //и если есть тэг заголовок h1 с названием GROUPS
             && isElementPresent(By.name("new")))   //и если есть элемент new
+            //&& isElementPresent(By.name("delete"))
+            //&& isElementPresent(By.name("edit")))   //и если есть элемент new
     {
       return;
     }
     click(By.linkText("GROUPS"));
   }
 }
+
