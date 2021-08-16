@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.model.ContactData;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 public class ContactModificationTests extends TestBase {
 
@@ -20,19 +21,16 @@ public class ContactModificationTests extends TestBase {
 
   @Test (enabled = true)
   public void testContactModification() {
-    List<ContactData> before = app.contact().list();  //выгружаем список контактов
-    int index = before.size()-2;
+    Set<ContactData> before = app.contact().all();  //выгружаем множество контактов перед модификацией
+    ContactData modifiedContact = before.iterator().next();  // выбираем любой контакт для модификации
     ContactData contact = new ContactData()
-            .withId(before.get(index).getId()).withFirstname("Sam").withLastname("Sadko").withEmail("sam@tut.by");
-    app.contact().modify(index, contact);
-    List<ContactData> after = app.contact().list();  // выгружаем лист для сравнения после модификации
+            .withId(modifiedContact.getId()).withFirstname("Sam").withLastname("Sadko").withEmail("sam@tut.by");
+    app.contact().modify(contact);
+    Set<ContactData> after = app.contact().all();  // выгружаем множество для сравнения после модификации
     Assert.assertEquals(after.size(), before.size()); // проверка, что записей осталось столько же
-    before.remove(index);  // из списка ДО модификации удаляем запись, которую модифицируем в тесте
+    before.remove(modifiedContact);  // из множества ДО модификации удаляем запись, которую модифицируем в тесте
     before.add(contact);  // добавляем запись со значениями модификации (в том числе и id)
-    Comparator<? super ContactData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());  // сортируем списки ДО и ПОСЛЕ по id и сравниваем их
-    before.sort(byId);
-    after.sort(byId);
-    Assert.assertEquals(before, after);
+    Assert.assertEquals(before, after); // сравниваем множества
 
     //app.getSessionHelper().logout();
   }

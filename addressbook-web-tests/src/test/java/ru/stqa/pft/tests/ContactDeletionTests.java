@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.model.ContactData;
 
 import java.util.List;
+import java.util.Set;
 
 public class ContactDeletionTests extends TestBase {
 
@@ -20,11 +21,12 @@ public class ContactDeletionTests extends TestBase {
 
   @Test
   public void testContactDeletion() {
-    List<ContactData> before = app.contact().list();
-    app.contact().delete(1);
-    List<ContactData> after = app.contact().list();
+    Set<ContactData> before = app.contact().all();
+    ContactData deletedContact = before.iterator().next();
+    app.contact().delete(deletedContact);
+    Set<ContactData> after = app.contact().all();
     Assert.assertEquals(after.size(), before.size()-1); // проверка что записей стало меньше на 1
-    before.remove(1); // удаляем из списка before ту же запись что и тестом
+    before.remove(deletedContact); // удаляем из списка before ту же запись что и тестом
     Assert.assertEquals(before, after);
     //app.getSessionHelper().logout(); // разлогин
   }

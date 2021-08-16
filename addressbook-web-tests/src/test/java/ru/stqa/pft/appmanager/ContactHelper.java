@@ -7,7 +7,9 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.model.ContactData;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 public class ContactHelper extends HelperBase {
@@ -49,16 +51,26 @@ public class ContactHelper extends HelperBase {
     //click(By.name("selected[]"));
   }
 
+  private void selectContactById(int id) {
+    wd.findElement(By.cssSelector("input[value='"+id+"']")).click();
+  }
+
   public void submitContactModification() {
     click(By.name("update"));
   }
 
   public void initContactModification(int index) {
     wd.findElements(By.cssSelector("td:nth-child(8)")).get(index).click();
-
-    //click(By.cssSelector("tr:nth-child(2) > .center:nth-child(8) img"));
-
+   //click(By.cssSelector("tr:nth-child(2) > .center:nth-child(8) img"));
   }
+
+  private void initContactModificationById(int id) {
+    String sel = "edit.php?id="+id;
+    wd.findElement(By.cssSelector("a[href='"+sel+"']")).click();
+  }
+  //<a href="edit.php?id=15"><img src="icons/pencil.png" title="EDIT" alt="EDIT"></a>
+//#maintable > tbody > tr:nth-child(6) > td:nth-child(8) > a > img
+ // #maintable > tbody > tr:nth-child(6) > td:nth-child(8) > a
 
   public void create(ContactData contact) {
     initContactCreation();
@@ -67,8 +79,8 @@ public class ContactHelper extends HelperBase {
     returnToHomePage();
   }
 
-  public void modify(int index, ContactData contact) {
-    initContactModification(index);  // модифицируем предпоследний по порядку
+  public void modify(ContactData contact) {
+    initContactModificationById(contact.getId());  // модифицируем предпоследний по порядку
     fillContactForm(contact, false);
     submitContactModification(); // подтвердили модификацию
     returnToHomePage(); // на страницу home
@@ -80,6 +92,15 @@ public class ContactHelper extends HelperBase {
     //assertThat(driver.switchTo().alert().getText(), is("Delete 1 addresses?"));
     closeAlert();
     gotoHome();
+  }
+
+  public void delete(ContactData deletedContact) {
+    selectContactById(deletedContact.getId());
+    deleteSelectedContacts();
+    //assertThat(driver.switchTo().alert().getText(), is("Delete 1 addresses?"));
+    closeAlert();
+    gotoHome();
+
   }
 
   public void returnToHomePage() {
@@ -102,6 +123,18 @@ public class ContactHelper extends HelperBase {
 
   public List<ContactData> list() {
     List<ContactData> contacts = new ArrayList<ContactData>();
+    List<WebElement> elements = wd.findElements(By.name("entry")); //найти все элементы с тэгом span и классом group
+    for (WebElement element : elements) {
+      String firstname = element.findElement(By.cssSelector("td:nth-child(3)")).getText();
+      String lastname = element.findElement(By.cssSelector("td:nth-child(2)")).getText();
+      int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+      contacts.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname));
+    }
+    return contacts;
+  }
+
+  public Set<ContactData> all() {
+    Set<ContactData> contacts = new HashSet<ContactData>();
     List<WebElement> elements = wd.findElements(By.name("entry")); //найти все элементы с тэгом span и классом group
     for (WebElement element : elements) {
       String firstname = element.findElement(By.cssSelector("td:nth-child(3)")).getText();

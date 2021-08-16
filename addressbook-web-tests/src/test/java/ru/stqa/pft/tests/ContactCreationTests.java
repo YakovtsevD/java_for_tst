@@ -6,6 +6,7 @@ import ru.stqa.pft.model.ContactData;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 public class ContactCreationTests extends TestBase {
 
@@ -13,21 +14,23 @@ public class ContactCreationTests extends TestBase {
   public void testContactCreation() {
 
     app.goTo().gotoHome();
-    List<ContactData> before = app.contact().list();  //выгружаем список контактов ДО
+    Set<ContactData> before = app.contact().all();  //выгружаем список контактов ДО
     ContactData contact = new ContactData().withFirstname("Ben").withLastname("Benson").withEmail("ben@tut.by").withGroup("newgroup777"); // создаем объекти контакта который добавляем
     app.contact().create(contact);
-    List<ContactData> after = app.contact().list();  // выгружаем лист для сравнения после создания
+    Set<ContactData> after = app.contact().all();  // выгружаем лист для сравнения после создания
     Assert.assertEquals(after.size(), before.size()+1); // проверка, что записей стало +1
-    contact.withId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId()); // у нового контакта максимальный id, находим этот id и присваиваем в объект contact
+    contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()); // у нового контакта максимальный id, находим этот id и присваиваем в объект contact
     before.add(contact); // добавляем контакт из теста в список ДО создания
-    //Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after)); //сравнение неупорядоченных списков
-    // сортировка и сравнение упорядоченных списков (сортировка нужна, т.к. после создания (модификации) контакта
-    // может измениться порядок в списке, который сортируется по фамилии)
-    Comparator<? super ContactData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
-    before.sort(byId);
-    after.sort(byId);
     Assert.assertEquals(before, after);
     //app.getSessionHelper().logout();
   }
+
+  //Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after)); //сравнение неупорядоченных списков
+  // сортировка и сравнение упорядоченных списков (сортировка нужна, т.к. после создания (модификации) контакта
+  // может измениться порядок в списке, который сортируется по фамилии)
+  //Comparator<? super ContactData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
+  //before.sort(byId);
+  //after.sort(byId);
+  //contact.withId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId()); // у нового контакта максимальный id, находим этот id и присваиваем в объект contact
 
 }
