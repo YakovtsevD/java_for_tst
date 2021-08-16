@@ -36,8 +36,10 @@ public class GroupModificationTests extends TestBase {
     GroupData group = new GroupData()
             .withId(modifiedGroup.getId()).withName("modgroup6").withHeader("header6").withFooter("footer6");
     app.group().modify(group);
+    Assert.assertEquals(app.group().Count(), before.size()); // быстрая проверка количества без загрузки списка групп after
     Groups after = app.group().all();
-    Assert.assertEquals(after.size(), before.size());
+
+    //Assert.assertEquals(after.size(), before.size());
 
     //т.к. после модификации порядок групп может измениться из-за сортировки по наименования, сравнивать надо неупорядоченные множества
     //before.remove(modifiedGroup);
