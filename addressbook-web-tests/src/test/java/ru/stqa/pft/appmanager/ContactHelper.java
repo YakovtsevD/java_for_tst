@@ -1,17 +1,14 @@
 package ru.stqa.pft.appmanager;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import ru.stqa.pft.model.ContactData;
-import ru.stqa.pft.model.GroupData;
-
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class ContactHelper extends HelperBase {
 
@@ -63,11 +60,26 @@ public class ContactHelper extends HelperBase {
 
   }
 
-  public void createContact(ContactData contact, boolean b) {
+  public void create(ContactData contact) {
     initContactCreation();
     fillContactForm(contact, true);
     submitContactCreation();
     returnToHomePage();
+  }
+
+  public void modify(int index, ContactData contact) {
+    initContactModification(index);  // модифицируем предпоследний по порядку
+    fillContactForm(contact, false);
+    submitContactModification(); // подтвердили модификацию
+    returnToHomePage(); // на страницу home
+  }
+
+  public void delete(int index) {
+    selectContact(index);
+    deleteSelectedContacts();
+    //assertThat(driver.switchTo().alert().getText(), is("Delete 1 addresses?"));
+    closeAlert();
+    gotoHome();
   }
 
   public void returnToHomePage() {
@@ -77,11 +89,18 @@ public class ContactHelper extends HelperBase {
     click(By.linkText("home page"));
   }
 
+  public void gotoHome() {
+    if (isElementPresent(By.id("maintable"))) {
+      return;
+    }
+    click(By.linkText("HOME"));
+  }
+
   public boolean isThereAContact() {
     return isElementPresent(By.name("selected[]"));
   }
 
-  public List<ContactData> getContactList() {
+  public List<ContactData> list() {
     List<ContactData> contacts = new ArrayList<ContactData>();
     List<WebElement> elements = wd.findElements(By.name("entry")); //найти все элементы с тэгом span и классом group
     for (WebElement element : elements) {

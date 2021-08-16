@@ -1,16 +1,10 @@
 package ru.stqa.pft.tests;
 
-import org.hamcrest.CoreMatchers;
-import org.hamcrest.MatcherAssert;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.model.GroupData;
 import ru.stqa.pft.model.Groups;
-
-import java.util.Comparator;
-import java.util.List;
-import java.util.Set;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.*;
@@ -19,7 +13,7 @@ public class GroupModificationTests extends TestBase {
 
   @BeforeMethod  // перед каждым тестом в классе будет проверка есть ли группа (с созданием, если групп нет)
   public void ensurePreConditions() {
-    app.goTo().GroupPage();
+    app.goTo().groupPage();
     //if (! app.group().isThereAGroup()) {
     if (app.group().all().size()==0) {
       app.group().create(new GroupData().withName("test1").withHeader("header1").withFooter("footer1"));
@@ -29,7 +23,7 @@ public class GroupModificationTests extends TestBase {
   @Test
   public void testGroupModification() {
 
-    app.goTo().GroupPage();
+    app.goTo().groupPage();
 
     Groups before = app.group().all();
     GroupData modifiedGroup = before.iterator().next();

@@ -12,7 +12,7 @@ public class GroupCreationTests extends TestBase {
 
   @Test (enabled = false)
   public void testGroupCreation() {
-    app.goTo().GroupPage();
+    app.goTo().groupPage();
 
     Groups before = app.group().all(); // список групп до создания новой
     GroupData group = new GroupData().withName("newgroup505").withHeader("header505").withFooter("foottter505");
@@ -26,7 +26,7 @@ public class GroupCreationTests extends TestBase {
 
   @Test
   public void testBadGroupCreation() {
-    app.goTo().GroupPage();
+    app.goTo().groupPage();
 
     Groups before = app.group().all(); // список групп до создания новой
     GroupData group = new GroupData().withName("newgroup'505").withHeader("header505").withFooter("foottter505"); // в названии группы '

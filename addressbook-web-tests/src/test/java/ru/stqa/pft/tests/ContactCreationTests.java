@@ -9,33 +9,25 @@ import java.util.List;
 
 public class ContactCreationTests extends TestBase {
 
-  @Test (enabled = false)
+  @Test
   public void testContactCreation() {
 
     app.goTo().gotoHome();
-    List<ContactData> before = app.getContactHelper().getContactList();  //выгружаем список контактов ДО
-    app.getContactHelper().initContactCreation();  // клик создать новый контакт
-    ContactData contact = new ContactData("Tod", "Wolf", "tod@tut.by", "newgroup777"); // создаем объекти контакта который добавляем
-    app.getContactHelper().fillContactForm(contact, true);  // запоняем контакт
-    app.getContactHelper().submitContactCreation();  // подтверждаем создание
-    app.goTo().gotoHomePage();  // на домашнюю
-
-    List<ContactData> after = app.getContactHelper().getContactList();  // выгружаем лист для сравнения после создания
+    List<ContactData> before = app.contact().list();  //выгружаем список контактов ДО
+    ContactData contact = new ContactData("Ben", "Benson", "ben@tut.by", "newgroup777"); // создаем объекти контакта который добавляем
+    app.contact().create(contact);
+    List<ContactData> after = app.contact().list();  // выгружаем лист для сравнения после создания
     Assert.assertEquals(after.size(), before.size()+1); // проверка, что записей стало +1
-
-    // у нового контакта максимальный id, находим этот id и присваиваем в объект contact
-    contact.setId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());
+    contact.setId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId()); // у нового контакта максимальный id, находим этот id и присваиваем в объект contact
     before.add(contact); // добавляем контакт из теста в список ДО создания
     //Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after)); //сравнение неупорядоченных списков
-
     // сортировка и сравнение упорядоченных списков (сортировка нужна, т.к. после создания (модификации) контакта
     // может измениться порядок в списке, который сортируется по фамилии)
     Comparator<? super ContactData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
     before.sort(byId);
     after.sort(byId);
     Assert.assertEquals(before, after);
-
-    app.getSessionHelper().logout();
+    //app.getSessionHelper().logout();
   }
 
 }
