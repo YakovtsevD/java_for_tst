@@ -2,13 +2,11 @@ package ru.stqa.pft.model;
 
 public class ContactData {
   private int id;
+  private String firstname;
+  private String lastname;
+  private String email;
+  private String group;
 
-  private final String firstname;
-  private final String lastname;
-  private final String email;
-  private final String group;
-
-  //---
   // переопределение стандартных методов под работу с объектами ContactData
   @Override
   public boolean equals(Object o) {
@@ -38,6 +36,7 @@ public class ContactData {
   }
   //---
 
+  /*
   public ContactData(int id, String firstname, String lastname, String email, String group) {
     this.id = id;
     this.firstname = firstname;
@@ -53,6 +52,7 @@ public class ContactData {
     this.email = email;
     this.group = group;
   }
+  */
 
   public String getFirstname() {
     return firstname;
@@ -73,7 +73,29 @@ public class ContactData {
     return id;
   }
 
-  public void setId(int id) {
+  public ContactData withId(int id) {
     this.id = id;
+    return this;
   }
+
+  public ContactData withFirstname(String firstname) {
+    this.firstname = firstname;
+    return this;
+  }
+
+  public ContactData withLastname(String lastname) {
+    this.lastname = lastname;
+    return this;
+  }
+
+  public ContactData withEmail(String email) {
+    this.email = email;
+    return this;
+  }
+
+  public ContactData withGroup(String group) {
+    this.group = group;
+    return this;
+  }
+
 }

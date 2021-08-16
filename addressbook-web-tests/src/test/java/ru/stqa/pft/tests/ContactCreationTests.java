@@ -14,11 +14,11 @@ public class ContactCreationTests extends TestBase {
 
     app.goTo().gotoHome();
     List<ContactData> before = app.contact().list();  //выгружаем список контактов ДО
-    ContactData contact = new ContactData("Ben", "Benson", "ben@tut.by", "newgroup777"); // создаем объекти контакта который добавляем
+    ContactData contact = new ContactData().withFirstname("Ben").withLastname("Benson").withEmail("ben@tut.by").withGroup("newgroup777"); // создаем объекти контакта который добавляем
     app.contact().create(contact);
     List<ContactData> after = app.contact().list();  // выгружаем лист для сравнения после создания
     Assert.assertEquals(after.size(), before.size()+1); // проверка, что записей стало +1
-    contact.setId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId()); // у нового контакта максимальный id, находим этот id и присваиваем в объект contact
+    contact.withId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId()); // у нового контакта максимальный id, находим этот id и присваиваем в объект contact
     before.add(contact); // добавляем контакт из теста в список ДО создания
     //Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after)); //сравнение неупорядоченных списков
     // сортировка и сравнение упорядоченных списков (сортировка нужна, т.к. после создания (модификации) контакта

@@ -14,7 +14,7 @@ public class ContactModificationTests extends TestBase {
     app.goTo().gotoHome();
     //if (!app.contact().isThereAContact()) {
     if (app.contact().list().size()==0) {
-      app.contact().create(new ContactData("Ivana", "Ivanova", "iva@tut.by", "newgroup777"));
+      app.contact().create(new ContactData().withFirstname("Ivana").withLastname("Ivanova").withEmail("iva@tut.by").withGroup("newgroup777"));
     }
   }
 
@@ -22,7 +22,8 @@ public class ContactModificationTests extends TestBase {
   public void testContactModification() {
     List<ContactData> before = app.contact().list();  //выгружаем список контактов
     int index = before.size()-2;
-    ContactData contact = new ContactData(before.get(index).getId(), "Sam", "Sadko", "sam@tut.by", null);
+    ContactData contact = new ContactData()
+            .withId(before.get(index).getId()).withFirstname("Sam").withLastname("Sadko").withEmail("sam@tut.by");
     app.contact().modify(index, contact);
     List<ContactData> after = app.contact().list();  // выгружаем лист для сравнения после модификации
     Assert.assertEquals(after.size(), before.size()); // проверка, что записей осталось столько же
