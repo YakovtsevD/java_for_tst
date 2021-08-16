@@ -43,7 +43,7 @@ public class ContactHelper extends HelperBase {
     wd.switchTo().alert().accept();
   }
 
-  public void deleteSelectedGroups() {
+  public void deleteSelectedContacts() {
     click(By.cssSelector(".left:nth-child(8) > input"));
   }
 
