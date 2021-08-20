@@ -10,6 +10,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 public class ContactCreationTests extends TestBase {
@@ -18,28 +19,23 @@ public class ContactCreationTests extends TestBase {
   public void testContactCreation() {
 
     app.goTo().gotoHome();
-    //Set<ContactData> before = app.contact().all();  //выгружаем список контактов ДО
     Contacts before = app.contact().all();  //выгружаем список контактов ДО
-    ContactData contact = new ContactData().withFirstname("Ben").withLastname("Benson").withEmail("ben@tut.by").withGroup("newgroup777"); // создаем объекти контакта который добавляем
+    ContactData contact = new ContactData().withFirstname("Ben").withLastname("Bensson").withEmail("ben@tut.by").withGroup("newgroup777"); // создаем объекти контакта который добавляем
     app.contact().create(contact);
-    //Set<ContactData> after = app.contact().all();  // выгружаем лист для сравнения после создания
     Contacts after = app.contact().all();  // выгружаем лист для сравнения после создания
-    //Assert.assertEquals(after.size(), before.size()+1); // проверка, что записей стало +1
-    MatcherAssert.assertThat(after.size(), equalTo(before.size()+1));
-    //contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()); // у нового контакта максимальный id, находим этот id и присваиваем в объект contact
-    //before.add(contact); // добавляем контакт из теста в список ДО создания
-    //Assert.assertEquals(before, after);
-    MatcherAssert.assertThat(after, equalTo(
+    assertThat(after.size(), equalTo(before.size()+1));
+    assertThat(after, equalTo(
             before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
     //app.getSessionHelper().logout();
   }
-
-  //Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after)); //сравнение неупорядоченных списков
-  // сортировка и сравнение упорядоченных списков (сортировка нужна, т.к. после создания (модификации) контакта
-  // может измениться порядок в списке, который сортируется по фамилии)
-  //Comparator<? super ContactData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
-  //before.sort(byId);
-  //after.sort(byId);
-  //contact.withId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId()); // у нового контакта максимальный id, находим этот id и присваиваем в объект contact
-
 }
+
+/*
+  String[] langs = {"Java","Ci","Python","PHP","Go","CiSharp","Delfi","Fortran",
+          "Assembler","Basic","Pascal","Perl","JavaScript","Ruby","Swift","Kotlin","Sql","Vala","Groovy","Ada"};
+
+    for (String l : langs) {
+    ContactData contact = new ContactData().withFirstname("Ben").withLastname(l).withEmail(l+"@tut.by").withGroup("newgroup777"); // создаем объекти контакта который добавляем
+    app.contact().create(contact);
+  }
+*/

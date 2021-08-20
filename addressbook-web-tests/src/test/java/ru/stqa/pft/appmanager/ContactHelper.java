@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.model.ContactData;
 import ru.stqa.pft.model.Contacts;
+import ru.stqa.pft.model.Groups;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -70,14 +71,12 @@ public class ContactHelper extends HelperBase {
     String sel = "edit.php?id="+id;
     wd.findElement(By.cssSelector("a[href='"+sel+"']")).click();
   }
-  //<a href="edit.php?id=15"><img src="icons/pencil.png" title="EDIT" alt="EDIT"></a>
-//#maintable > tbody > tr:nth-child(6) > td:nth-child(8) > a > img
- // #maintable > tbody > tr:nth-child(6) > td:nth-child(8) > a
 
   public void create(ContactData contact) {
     initContactCreation();
     fillContactForm(contact, true);
     submitContactCreation();
+    contactCache = null;
     returnToHomePage();
   }
 
@@ -85,6 +84,7 @@ public class ContactHelper extends HelperBase {
     initContactModificationById(contact.getId());  // модифицируем предпоследний по порядку
     fillContactForm(contact, false);
     submitContactModification(); // подтвердили модификацию
+    contactCache = null;
     returnToHomePage(); // на страницу home
   }
 
@@ -99,6 +99,7 @@ public class ContactHelper extends HelperBase {
   public void delete(ContactData deletedContact) {
     selectContactById(deletedContact.getId());
     deleteSelectedContacts();
+    contactCache = null;
     //assertThat(driver.switchTo().alert().getText(), is("Delete 1 addresses?"));
     closeAlert();
     gotoHome();
@@ -135,16 +136,22 @@ public class ContactHelper extends HelperBase {
     return contacts;
   }
 
+  private Contacts contactCache = null;
+
   public Contacts all() {
-    Contacts contacts = new Contacts();
+    if (contactCache != null) {
+      return new Contacts(contactCache);
+    }
+    //Contacts contacts = new Contacts();
+    contactCache = new Contacts();
     List<WebElement> elements = wd.findElements(By.name("entry")); //найти все элементы с тэгом span и классом group
     for (WebElement element : elements) {
       String firstname = element.findElement(By.cssSelector("td:nth-child(3)")).getText();
       String lastname = element.findElement(By.cssSelector("td:nth-child(2)")).getText();
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-      contacts.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname));
+      contactCache.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname));
     }
-    return contacts;
+    return new Contacts(contactCache);
   }
 
   /*
