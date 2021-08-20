@@ -31,7 +31,7 @@ public class GroupCreationTests extends TestBase {
     Groups before = app.group().all(); // список групп до создания новой
     GroupData group = new GroupData().withName("newgroup'505").withHeader("header505").withFooter("foottter505"); // в названии группы '
     app.group().create(group); // создание группы
-    assertThat(app.group().Count(), equalTo(before.size())); // хэширование, вместо загрузки полного списка after
+    assertThat(app.group().count(), equalTo(before.size())); // хэширование, вместо загрузки полного списка after
     // просто считаем количество и сравниваем с before (который в кэше), т.е. можем быстрее найти ошибку количества записей
     Groups after = app.group().all(); // список групп после создания новой
     //assertThat(after.size(), equalTo(before.size())); // сравнение количества до и после вариант 2

@@ -25,7 +25,7 @@ public class GroupDeletionTests extends TestBase {
     Groups before = app.group().all();
     GroupData deletedGroup = before.iterator().next();
     app.group().delete(deletedGroup);
-    assertEquals(app.group().Count(), before.size()-1);
+    assertEquals(app.group().count(), before.size()-1);
     Groups after = app.group().all();
     //before.remove(deletedGroup); // удаляем из списка before элемент, который удалили в тесте, чтобы списки до и после стали одинаковыми
     //Assert.assertEquals(before, after);
