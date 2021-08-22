@@ -68,8 +68,22 @@ public class ContactHelper extends HelperBase {
   }
 
   private void initContactModificationById(int id) {
-    String sel = "edit.php?id="+id;
-    wd.findElement(By.cssSelector("a[href='"+sel+"']")).click();
+    //1 т.к. ссылка href содержит идентификатор, ищем по ней
+    //String sel = "edit.php?id="+id;
+    //wd.findElement(By.cssSelector("a[href='"+sel+"']")).click();
+    //2 то же самое одной строкой
+    wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click();
+    /*
+    //3 в функции selectContactById ищем по тэгу input значение value, от него на 2 уровня вверх, находим 8ую колонку td(8) и в ней анкер a
+    wd.findElement(By.xpath(String.format("//input[@value='&s']/../../td(8)/a", id))).click();
+    //4 ищем внутри строки tr подзапросом тэг input параметром value равным id(передан в функцию)
+    wd.findElement(By.xpath(String.format("//tr[.//input[@value='&s']]/td(8)/a", id))).click();
+    //5 последовательный поиск в несколько строк для примера
+    WebElement checkbox = wd.findElement(By.cssSelector(String.format("input[value='%s']", id))); //нашли чекбокс
+    WebElement row = checkbox.findElement(By.xpath("./../..")); // переходим на нужный уровень - на строку
+    List<WebElement> cells = row.findElements(By.tagName("td")); // загружаем все колонки(td) строки
+    cells.get(7).findElement(By.tagName("a")).click(); // кликаем элемент a
+    */
   }
 
   public void create(ContactData contact) {
@@ -156,6 +170,19 @@ public class ContactHelper extends HelperBase {
       contactCache.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname));
     }
     return new Contacts(contactCache);
+  }
+
+  public ContactData infoFromEditForm(ContactData contact) {
+    initContactModificationById(contact.getId());
+    String firstname = wd.findElement(By.name("firstname")).getAttribute("value");
+    String lastname = wd.findElement(By.name("lastname")).getAttribute("value");
+    String home = wd.findElement(By.name("home")).getAttribute("value");
+    String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
+    String work = wd.findElement(By.name("work")).getAttribute("value");
+    wd.navigate().back();
+    return new ContactData()
+            .withFirstname(firstname).withLastname(lastname).withHome(home).withMobile(mobile).withWork(work);
+
   }
 
   /*
