@@ -7,12 +7,9 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.model.ContactData;
 import ru.stqa.pft.model.Contacts;
-import ru.stqa.pft.model.Groups;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 
 public class ContactHelper extends HelperBase {
@@ -164,10 +161,26 @@ public class ContactHelper extends HelperBase {
     contactCache = new Contacts();
     List<WebElement> elements = wd.findElements(By.name("entry")); //найти все элементы с тэгом span и классом group
     for (WebElement element : elements) {
+
+      /*
+      //моя реализация
+      int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
       String firstname = element.findElement(By.cssSelector("td:nth-child(3)")).getText();
       String lastname = element.findElement(By.cssSelector("td:nth-child(2)")).getText();
-      int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-      contactCache.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname));
+      String allPhones = element.findElement(By.cssSelector("td:nth-child(6)")).getText();
+      String[] phones = allPhones.split("\n"); // строку "все телефоны" порезали по признаку перевода строки на фрагменты и загнали в массив
+      */
+
+      // реализация из курса
+      List<WebElement> cells = element.findElements(By.tagName("td"));
+      int id = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("value"));
+      String firstname = cells.get(2).getText();
+      String lastname = cells.get(1).getText();
+      String[] phones = cells.get(5).getText().split("\n"); // строку "все телефоны" порезали по признаку перевода строки на фрагменты и загнали в массив
+
+      contactCache.add(new ContactData()
+              .withId(id).withFirstname(firstname).withLastname(lastname)
+              .withHomePhone(phones[0]).withMobilePhone(phones[1]).withWorkPhone(phones[2]));
     }
     return new Contacts(contactCache);
   }
@@ -181,7 +194,7 @@ public class ContactHelper extends HelperBase {
     String work = wd.findElement(By.name("work")).getAttribute("value");
     wd.navigate().back();
     return new ContactData()
-            .withFirstname(firstname).withLastname(lastname).withHome(home).withMobile(mobile).withWork(work);
+            .withFirstname(firstname).withLastname(lastname).withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work);
 
   }
 
