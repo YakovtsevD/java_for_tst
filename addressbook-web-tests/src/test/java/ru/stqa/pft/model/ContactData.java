@@ -6,9 +6,10 @@ public class ContactData {
   private String lastname;
   private String email;
   private String group;
-  private String home;
-  private String mobile;
-  private String work;
+  private String homePhone;
+  private String mobilePhone;
+  private String workPhone;
+  private String allPhones;
 
   // переопределение стандартных методов под работу с объектами ContactData
   @Override
@@ -76,15 +77,19 @@ public class ContactData {
   }
 
   public String getHomePhone() {
-    return home;
+    return homePhone;
   }
 
   public String getMobilePhone() {
-    return mobile;
+    return mobilePhone;
   }
 
   public String getWorkPhone() {
-    return work;
+    return workPhone;
+  }
+
+  public String getAllPhones() {
+    return allPhones;
   }
 
   public ContactData withId(int id) {
@@ -113,17 +118,22 @@ public class ContactData {
   }
 
   public ContactData withHomePhone(String home) {
-    this.home = home;
+    this.homePhone = home;
     return this;
   }
 
   public ContactData withMobilePhone(String mobile) {
-    this.mobile = mobile;
+    this.mobilePhone = mobile;
     return this;
   }
 
   public ContactData withWorkPhone(String work) {
-    this.work = work;
+    this.workPhone = work;
+    return this;
+  }
+
+  public ContactData withAllPhones(String allPhones) {
+    this.allPhones = allPhones;
     return this;
   }
 
