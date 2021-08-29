@@ -14,6 +14,7 @@ public class Contacts extends ForwardingSet<ContactData> {
         this.delegate = new HashSet<ContactData>(contacts.delegate);
     }
 
+    //конструктор пустой
     public Contacts() {
         this.delegate=new HashSet<ContactData>();
     }

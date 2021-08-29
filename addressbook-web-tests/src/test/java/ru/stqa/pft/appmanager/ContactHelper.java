@@ -7,7 +7,6 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.model.ContactData;
 import ru.stqa.pft.model.Contacts;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,6 +80,10 @@ public class ContactHelper extends HelperBase {
     List<WebElement> cells = row.findElements(By.tagName("td")); // загружаем все колонки(td) строки
     cells.get(7).findElement(By.tagName("a")).click(); // кликаем элемент a
     */
+  }
+
+  private void initContactDetailsById(int id) {
+    wd.findElement(By.cssSelector(String.format("a[href='view.php?id=%s']", id))).click();
   }
 
   public void create(ContactData contact) {
@@ -159,9 +162,8 @@ public class ContactHelper extends HelperBase {
     }
     //Contacts contacts = new Contacts();
     contactCache = new Contacts();
-    List<WebElement> elements = wd.findElements(By.name("entry")); //найти все элементы с тэгом span и классом group
+    List<WebElement> elements = wd.findElements(By.name("entry")); //найти все элементы с имененм entry (загрузили все строки)
     for (WebElement element : elements) {
-
       /*
       //моя реализация
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
@@ -170,19 +172,22 @@ public class ContactHelper extends HelperBase {
       String allPhones = element.findElement(By.cssSelector("td:nth-child(6)")).getText();
       String[] phones = allPhones.split("\n"); // строку "все телефоны" порезали по признаку перевода строки на фрагменты и загнали в массив
       */
-
       // реализация из курса
-      List<WebElement> cells = element.findElements(By.tagName("td"));
+      List<WebElement> cells = element.findElements(By.tagName("td")); // из каждой строки загружаем колонки и
       int id = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("value"));
       String firstname = cells.get(2).getText();
       String lastname = cells.get(1).getText();
+
+      // метод прямой проверки
       //String[] phones = cells.get(5).getText().split("\n"); // строку "все телефоны" порезали по признаку перевода строки на фрагменты и загнали в массив
       //contactCache.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname).withHomePhone(phones[0]).withMobilePhone(phones[1]).withWorkPhone(phones[2]));
 
       // метод обратных проверок
       String allPhones = cells.get(5).getText();
+      String allEmails = cells.get(4).getText();
+      String address = cells.get(3).getText();
       contactCache.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname)
-              .withAllPhones(allPhones));
+              .withAllPhones(allPhones).withAddress(address).withAllEmails(allEmails));
     }
     return new Contacts(contactCache);
   }
@@ -194,10 +199,32 @@ public class ContactHelper extends HelperBase {
     String home = wd.findElement(By.name("home")).getAttribute("value");
     String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
     String work = wd.findElement(By.name("work")).getAttribute("value");
+    String email = wd.findElement(By.name("email")).getAttribute("value");
+    String email2 = wd.findElement(By.name("email2")).getAttribute("value");
+    String email3 = wd.findElement(By.name("email3")).getAttribute("value");
+    String address = wd.findElement(By.name("address")).getAttribute("value");
     wd.navigate().back();
     return new ContactData()
-            .withFirstname(firstname).withLastname(lastname).withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work);
+            .withId(contact.getId()).withFirstname(firstname).withLastname(lastname)
+            .withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work)
+            .withEmail(email).withEmail2(email2).withEmail3(email3)
+            .withAddress(address);
 
+  }
+
+  public ContactData infoFromDetailsForm(ContactData contact) {
+    initContactDetailsById(contact.getId());
+    String fullName = wd.findElement(By.cssSelector("#content > b")).getText(); // имя + фамилия через пробел
+    String[] name = fullName.split(" "); // загоняем в массив
+    //String contactDetails = wd.findElement(By.xpath("//*[@id='content']")).getText(); // находим элемент content, вся инфа о контакте это text
+    String contactDetails = wd.findElement(By.cssSelector("#content")).getText(); // то же самое, но через cssSelector
+    String[] details = contactDetails.split("\n"); // инфу контакта загоняем в массив
+    wd.navigate().back();
+    return new ContactData()
+            .withId(contact.getId()).withFirstname(name[0]).withLastname(name[1])
+            .withHomePhone(details[3]).withMobilePhone(details[4]).withWorkPhone(details[5])
+            .withEmail(details[7]).withEmail2(details[8]).withEmail3(details[9])
+            .withAddress(details[1]);
   }
 
   /*
