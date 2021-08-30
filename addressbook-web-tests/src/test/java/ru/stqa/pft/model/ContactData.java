@@ -1,5 +1,7 @@
 package ru.stqa.pft.model;
 
+import java.io.File;
+
 public class ContactData {
   private int id;
   private String firstname;
@@ -14,6 +16,7 @@ public class ContactData {
   private String email2;
   private String email3;
   private String allEmails;
+  private File photo;
 
   // переопределение стандартных методов под работу с объектами ContactData
   @Override
@@ -111,6 +114,16 @@ public class ContactData {
     return allEmails;
   }
 
+  public File getPhoto() {
+    return photo;
+  }
+
+
+
+  public ContactData withPhoto(File photo) {
+    this.photo = photo;
+    return this;
+  }
 
   public ContactData withId(int id) {
     this.id = id;

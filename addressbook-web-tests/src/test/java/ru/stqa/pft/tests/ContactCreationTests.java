@@ -4,17 +4,19 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.model.ContactData;
 import ru.stqa.pft.model.Contacts;
 
+import java.io.File;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 public class ContactCreationTests extends TestBase {
 
-  @Test
+  @Test (enabled = true)
   public void testContactCreation() {
-
     app.goTo().gotoHome();
     Contacts before = app.contact().all();  //выгружаем список контактов ДО
-    ContactData contact = new ContactData().withFirstname("Ben").withLastname("Bensson").withEmail("ben@tut.by").withGroup("newgroup777"); // создаем объекти контакта который добавляем
+    File photo = new File("src/test/recourses/stru.png");
+    ContactData contact = new ContactData().withFirstname("Aon").withLastname("Aarobensson").withEmail("aon@tut.by").withPhoto(photo); // создаем объекти контакта который добавляем
     app.contact().create(contact);
     assertThat(app.contact().count(), equalTo(before.size()+1)); // сравниваем количество записей (count) до загрузки списка повторно, ловим ошибку раньше
     Contacts after = app.contact().all();  // выгружаем лист для сравнения после создания
@@ -24,7 +26,16 @@ public class ContactCreationTests extends TestBase {
     //app.getSessionHelper().logout();
   }
 
-  @Test
+  @Test (enabled = false)
+  public void testCurrentDir() {
+    File currentDir = new File(".");
+    System.out.println(currentDir.getAbsolutePath());
+    File photo = new File("src/test/recourses/stru.png");
+    System.out.println(photo.getAbsolutePath());
+    System.out.println(photo.exists());
+  }
+
+  @Test (enabled = false)
   public void testBadContactCreation() {
 
     app.goTo().gotoHome();
