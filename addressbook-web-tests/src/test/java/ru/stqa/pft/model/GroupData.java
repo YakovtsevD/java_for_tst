@@ -1,6 +1,11 @@
 package ru.stqa.pft.model;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
+@XStreamAlias("group")
 public class GroupData {
+  @XStreamOmitField //аннотация НЕ выгружать поле id XML
   private int id;
   private String name;
   private String header;

@@ -10,6 +10,7 @@ dependencies {
     implementation 'org.hamcrest:java-hamcrest:2.0.0.0'
     implementation 'org.slf4j:slf4j-nop:2.0.0-alpha4'
     implementation 'com.beust:jcommander:1.81'
+    implementation 'com.thoughtworks.xstream:xstream:1.4.8'
     //implementation 'junit:junit:4.13.1'
     //testImplementation 'junit:junit:4.13'
     //testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.1'

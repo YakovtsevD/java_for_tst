@@ -1,0 +1,27 @@
+<list>
+  <group>
+    <name>aaa_group_5</name>
+    <header>aaa_group_header_5</header>
+    <footer>aaa_group_footer_5</footer>
+  </group>
+  <group>
+    <name>aaa_group_1</name>
+    <header>aaa_group_header_1</header>
+    <footer>aaa_group_footer_1</footer>
+  </group>
+  <group>
+    <name>aaa_group_2</name>
+    <header>aaa_group_header_2</header>
+    <footer>aaa_group_footer_2</footer>
+  </group>
+  <group>
+    <name>aaa_group_3</name>
+    <header>aaa_group_header_3</header>
+    <footer>aaa_group_footer_3</footer>
+  </group>
+  <group>
+    <name>aaa_group_4</name>
+    <header>aaa_group_header_4</header>
+    <footer>aaa_group_footer_4</footer>
+  </group>
+</list>
