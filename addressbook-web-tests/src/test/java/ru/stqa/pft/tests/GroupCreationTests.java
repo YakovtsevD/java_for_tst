@@ -22,59 +22,60 @@ public class GroupCreationTests extends TestBase {
   public Iterator<Object[]> validGroupsCsv() throws IOException {
     //csv
     List<Object[]> list = new ArrayList<Object[]>();
-    BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/recourses/groups.csv")));
-    String line = reader.readLine();
-    while (line != null) {
-      String[] split = line.split(";");
-      list.add(new Object[]{new GroupData().withName(split[0]).withHeader(split[1]).withFooter(split[2])});
-      line = reader.readLine();
+    try(BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/recourses/groups.csv")))) {
+      String line = reader.readLine();
+      while (line != null) {
+        String[] split = line.split(";");
+        list.add(new Object[]{new GroupData().withName(split[0]).withHeader(split[1]).withFooter(split[2])});
+        line = reader.readLine();
+      }
+      return list.iterator();
     }
-    return list.iterator();
   }
 
   @DataProvider
   public Iterator<Object[]> validGroupsXml() throws IOException {
     //xml
-    BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/recourses/groups.xml")));
-    String xml = "";
-    String line = reader.readLine();
-    while (line != null) {
-      xml += line;
-      line = reader.readLine();
+    try(BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/recourses/groups.xml")))) {
+      String xml = "";
+      String line = reader.readLine();
+      while (line != null) {
+        xml += line;
+        line = reader.readLine();
+      }
+      XStream xstream = new XStream();
+      xstream.processAnnotations(GroupData.class);
+      List<GroupData> groups = (List<GroupData>) xstream.fromXML(xml);
+      return groups.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
     }
-    XStream xstream = new XStream();
-    xstream.processAnnotations(GroupData.class);
-    List<GroupData> groups = (List<GroupData>) xstream.fromXML(xml);
-    return groups.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
-
   }
 
   @DataProvider
   public Iterator<Object[]> validGroupsJson() throws IOException {
     //json
-    BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/recourses/groups.json")));
-    String json = "";
-    String line = reader.readLine();
-    while (line != null) {
-      json += line;
-      line = reader.readLine();
+    try(BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/recourses/groups.json")))) {
+      String json = "";
+      String line = reader.readLine();
+      while (line != null) {
+        json += line;
+        line = reader.readLine();
+      }
+      Gson gson = new Gson();
+      List<GroupData> groups = gson.fromJson(json, new TypeToken<List<GroupData>>() {}.getType());
+      return groups.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
     }
-    Gson gson = new Gson();
-    List<GroupData> groups = gson.fromJson(json, new TypeToken<List<GroupData>>(){}.getType());
-    return groups.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
   }
 
-  @Test (dataProvider = "validGroupsXml")
+  @Test (dataProvider = "validGroupsJson")
   //public void testGroupCreation(String name, String header, String footer) {
   public void testGroupCreation(GroupData group) {
     app.goTo().groupPage();
     Groups before = app.group().all(); // список групп до создания новой
-    //GroupData group = new GroupData().withName(name).withHeader(header).withFooter(footer);
+    //GroupData group = new GroupData().withName(name).withHeader(header).withFooter(footer); //наполнение теперь в провайдере
     app.group().create(group); // создание группы
     Groups after = app.group().all(); // список групп после создания новой
     assertThat(after.size(), equalTo(before.size()+1)); // сравнение количества до и после вариант 2
     assertThat(after, equalTo(before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
-
     //app.goTo().gotoHome();
   }
 
