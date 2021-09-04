@@ -5,10 +5,10 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.model.GroupData;
 import ru.stqa.pft.model.Groups;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.testng.Assert.assertEquals;
@@ -16,11 +16,19 @@ import static org.testng.Assert.assertEquals;
 public class GroupCreationTests extends TestBase {
 
   @DataProvider
-  public Iterator<Object[]> validGroups() {
+  public Iterator<Object[]> validGroups() throws IOException {
     List<Object[]> list = new ArrayList<Object[]>();
-    list.add(new Object[] {new GroupData().withName("gro01").withHeader("hea01").withFooter("fo01")});
-    list.add(new Object[] {new GroupData().withName("gro02").withHeader("hea02").withFooter("fo02")});
-    list.add(new Object[] {new GroupData().withName("gro03").withHeader("hea03").withFooter("fo03")});
+    //list.add(new Object[] {new GroupData().withName("gro01").withHeader("hea01").withFooter("fo01")});
+    //list.add(new Object[] {new GroupData().withName("gro02").withHeader("hea02").withFooter("fo02")});
+    //list.add(new Object[] {new GroupData().withName("gro03").withHeader("hea03").withFooter("fo03")});
+    BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/recourses/groups.csv")));
+    String line = reader.readLine();
+    while (line != null) {
+      String[] split = line.split(";");
+      list.add(new Object[]{new GroupData().withName(split[0]).withHeader(split[1]).withFooter(split[2])});
+      line = reader.readLine();
+    }
+
     return list.iterator();
   }
 
