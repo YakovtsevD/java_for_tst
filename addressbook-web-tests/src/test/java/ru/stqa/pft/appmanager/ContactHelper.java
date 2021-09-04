@@ -225,9 +225,9 @@ public class ContactHelper extends HelperBase {
     wd.navigate().back();
     return new ContactData()
             .withId(contact.getId()).withFirstname(name[0]).withLastname(name[1])
-            .withHomePhone(details[3]).withMobilePhone(details[4]).withWorkPhone(details[5])
-            .withEmail(details[7]).withEmail2(details[8]).withEmail3(details[9])
-            .withAddress(details[1]);
+            .withHomePhone(details[4]).withMobilePhone(details[5]).withWorkPhone(details[6])
+            .withEmail(details[8]).withEmail2(details[9]).withEmail3(details[10])
+            .withAddress(details[2]);
   }
 
   /*

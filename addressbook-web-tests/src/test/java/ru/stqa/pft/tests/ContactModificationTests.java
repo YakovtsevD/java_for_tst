@@ -19,7 +19,7 @@ public class ContactModificationTests extends TestBase {
     }
   }
 
-  @Test (enabled = true)
+  @Test (enabled = false)
   public void testContactModification() {
     Contacts before = app.contact().all();  //выгружаем множество контактов перед модификацией
     ContactData modifiedContact = before.iterator().next();  // выбираем любой контакт для модификации

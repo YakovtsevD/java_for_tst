@@ -13,21 +13,22 @@ dependencies {
     //implementation 'com.thoughtworks.xstream:xstream:1.4.18' // не заработал
     implementation 'com.thoughtworks.xstream:xstream:1.4.8'
     implementation 'com.google.code.gson:gson:2.8.8'
-    //implementation 'junit:junit:4.13.1'
-    //testImplementation 'junit:junit:4.13'
-    //testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.1'
-    //testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
-    //testImplementation("org.assertj:assertj-core:3.10.0")
-    //implementation 'org.slf4j:slf4j-parent:2.0.0-alpha2'
-    //implementation 'org.slf4j:slf4j-site:2.0.0-alpha1'
+}
+
+task testGroups(type: Test) {
+    useTestNG {
+        suites 'src/test/recourses/testng-groups.xml'
+    }
+}
+
+task testContacts(type: Test) {
+    useTestNG {
+        suites 'src/test/recourses/testng-contacts.xml'
+    }
 }
 
 
-test {
-    useTestNG()
-    //useJUnitPlatform()
- }
-
+/*
 allprojects {
     gradle.projectsEvaluated {
         tasks.withType(JavaCompile) {
@@ -35,3 +36,4 @@ allprojects {
         }
     }
 }
+*/

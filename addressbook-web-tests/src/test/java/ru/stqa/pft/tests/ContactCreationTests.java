@@ -11,7 +11,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class ContactCreationTests extends TestBase {
 
-  @Test (enabled = true)
+  @Test (enabled = false)
   public void testContactCreation() {
     app.goTo().gotoHome();
     Contacts before = app.contact().all();  //выгружаем список контактов ДО
