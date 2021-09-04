@@ -3,6 +3,8 @@ package ru.stqa.pft.generators;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.ParameterException;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.thoughtworks.xstream.XStream;
 import ru.stqa.pft.model.GroupData;
 import java.io.File;
@@ -45,14 +47,24 @@ public class GroupDataGenerator {
             saveAsCSV(groups, new File(file));
         } else if (format.equals("xml")) {
             saveAsXML(groups, new File(file));
-         } else {
+        } else if (format.equals("json")) {
+            saveAsJSON(groups, new File(file));
+        } else {
             System.out.println("Unrecognized format");
         }
     }
 
+    private void saveAsJSON(List<GroupData> groups, File file) throws IOException {
+        Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
+        String json = gson.toJson(groups);
+        Writer writer = new FileWriter(file);
+        writer.write(json);
+        writer.close();
+
+    }
+
     private void saveAsXML(List<GroupData> groups, File file) throws IOException {
         XStream xstream = new XStream();
-        //xstream.addPermission(AnyTypePermission.ANY);
         //xstream.alias("group", GroupData.class); //улучшаем читаемость, вместо тэга <ru.stqa.pft.model.GroupData> будет <group>
         xstream.processAnnotations(GroupData.class); //или можно реализовать через аннотации в GroupData @XStreamAlias("group") и @XStreamOmitField для id
         String xml = xstream.toXML(groups);
@@ -73,9 +85,10 @@ public class GroupDataGenerator {
     private List<GroupData> generateGroups(int count) {
         List<GroupData> groups = new ArrayList<GroupData>();
         for (int i = 0; i < count; i++){
-            groups.add(new GroupData().withName(String.format("aaa_group_%s", i))
-                    .withHeader(String.format("aaa_group_header_%s", i))
-                    .withFooter(String.format("aaa_group_footer_%s", i)));
+            groups.add(new GroupData()
+                    .withName(String.format("%s_group_%s",format, i))
+                    .withHeader(String.format("%s_group_header_%s",format, i))
+                    .withFooter(String.format("%s_group_footer_%s",format, i)));
         }
         return groups;
     }
