@@ -7,7 +7,9 @@ import ru.stqa.pft.appmanager.ApplicationManager;
 
 public class TestBase {
 
-  protected static final ApplicationManager app = new ApplicationManager(BrowserType.CHROME);  // переменная static будет доступна всем методам(тестам) в suite
+  //protected static final ApplicationManager app = new ApplicationManager(BrowserType.CHROME);  // переменная static будет доступна всем методам(тестам) в suite
+  protected static final ApplicationManager app
+          = new ApplicationManager(System.getProperty("browser", BrowserType.CHROME));  //
 
   @BeforeSuite  // аннотация suite позволяет запускать все тесты одного запуска(suite) в одном браузере
   public void setUp() throws Exception{
