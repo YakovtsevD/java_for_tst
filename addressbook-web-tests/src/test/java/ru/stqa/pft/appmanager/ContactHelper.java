@@ -26,6 +26,7 @@ public class ContactHelper extends HelperBase {
     type(By.name("firstname"), contactData.getFirstname());
     type(By.name("lastname"), contactData.getLastname());
     type(By.name("email"), contactData.getEmail());
+    type(By.name("address"), contactData.getAddress());
     attach(By.name("photo"), contactData.getPhoto()); // функция attach не содержит клика на элементе выбора фото, т.к. откроется окно выбора файла и тест зависнет
     if (creation) {
       if (contactData.getGroup() != null) {

@@ -1,0 +1,17 @@
+<list>
+  <contact>
+    <firstname>xml_FirstName_0</firstname>
+    <lastname>xml_LastName_0</lastname>
+    <address>xml_Address_0</address>
+  </contact>
+  <contact>
+    <firstname>xml_FirstName_1</firstname>
+    <lastname>xml_LastName_1</lastname>
+    <address>xml_Address_1</address>
+  </contact>
+  <contact>
+    <firstname>xml_FirstName_2</firstname>
+    <lastname>xml_LastName_2</lastname>
+    <address>xml_Address_2</address>
+  </contact>
+</list>
