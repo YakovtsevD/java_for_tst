@@ -1,0 +1,17 @@
+[
+  {
+    "name": "json_group_1",
+    "header": "json_group_header_1",
+    "footer": "json_group_footer_1"
+  },
+  {
+    "name": "json_group_2",
+    "header": "json_group_header_2",
+    "footer": "json_group_footer_2"
+  },
+  {
+    "name": "json_group_3",
+    "header": "json_group_header_3",
+    "footer": "json_group_footer_3"
+  }
+]

@@ -1,0 +1,6 @@
+4373 [main] INFO  ru.stqa.pft.tests.TestBase - Start test testContactCreationwith parameters [ContactData{id=0, firstname='csv_FirstName_0', lastname='csv_LastName_0'}]
+10929 [main] INFO  ru.stqa.pft.tests.TestBase - Stop test testContactCreation
+10930 [main] INFO  ru.stqa.pft.tests.TestBase - Start test testContactCreationwith parameters [ContactData{id=0, firstname='csv_FirstName_1', lastname='csv_LastName_1'}]
+15330 [main] INFO  ru.stqa.pft.tests.TestBase - Stop test testContactCreation
+15331 [main] INFO  ru.stqa.pft.tests.TestBase - Start test testContactCreationwith parameters [ContactData{id=0, firstname='csv_FirstName_2', lastname='csv_LastName_2'}]
+19707 [main] INFO  ru.stqa.pft.tests.TestBase - Stop test testContactCreation

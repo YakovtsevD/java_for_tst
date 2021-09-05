@@ -27,7 +27,7 @@ public class ContactCreationTests extends TestBase {
   public Iterator<Object[]> validContactsCsv() throws IOException {
     //csv
     List<Object[]> list = new ArrayList<Object[]>();
-    try(BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/recourses/contact.csv")))) {
+    try(BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contact.csv")))) {
       String line = reader.readLine();
       while (line != null) {
         String[] split = line.split(";");
@@ -41,7 +41,7 @@ public class ContactCreationTests extends TestBase {
   @DataProvider
   public Iterator<Object[]> validContactsXml() throws IOException {
     //xml
-    try(BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/recourses/contact.xml")))) {
+    try(BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contact.xml")))) {
       String xml = "";
       String line = reader.readLine();
       while (line != null) {
@@ -58,7 +58,7 @@ public class ContactCreationTests extends TestBase {
   @DataProvider
   public Iterator<Object[]> validContactsJson() throws IOException {
     //json
-    try(BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/recourses/contact.json")))) {
+    try(BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contact.json")))) {
       String json = "";
       String line = reader.readLine();
       while (line != null) {
@@ -76,7 +76,7 @@ public class ContactCreationTests extends TestBase {
   public void testContactCreation(ContactData contact) {
     app.goTo().gotoHome();
     Contacts before = app.contact().all();  //выгружаем список контактов ДО
-    //File photo = new File("src/test/recourses/stru.png");
+    //File photo = new File("src/test/resources/stru.png");
     //ContactData contact = new ContactData().withFirstname("Aon").withLastname("Aarobensson").withEmail("aon@tut.by").withPhoto(photo); // создаем объекти контакта который добавляем
     app.contact().create(contact);
     assertThat(app.contact().count(), equalTo(before.size()+1)); // сравниваем количество записей (count) до загрузки списка повторно, ловим ошибку раньше

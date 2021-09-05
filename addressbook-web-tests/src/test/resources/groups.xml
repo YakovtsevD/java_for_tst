@@ -1,0 +1,17 @@
+<list>
+  <group>
+    <name>xml_group_1</name>
+    <header>xml_group_header_1</header>
+    <footer>xml_group_footer_1</footer>
+  </group>
+  <group>
+    <name>xml_group_2</name>
+    <header>xml_group_header_2</header>
+    <footer>xml_group_footer_2</footer>
+  </group>
+  <group>
+    <name>xml_group_3</name>
+    <header>xml_group_header_3</header>
+    <footer>xml_group_footer_3</footer>
+  </group>
+</list>
