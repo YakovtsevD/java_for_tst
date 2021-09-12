@@ -72,10 +72,12 @@ public class GroupCreationTests extends TestBase {
   //public void testGroupCreation(String name, String header, String footer) {
   public void testGroupCreation(GroupData group) {
     app.goTo().groupPage();
-    Groups before = app.group().all(); // список групп до создания новой
+    //Groups before = app.group().all(); // список групп до создания новой
+    Groups before = app.db().groups();
     //GroupData group = new GroupData().withName(name).withHeader(header).withFooter(footer); //наполнение теперь в провайдере
     app.group().create(group); // создание группы
-    Groups after = app.group().all(); // список групп после создания новой
+    //Groups after = app.group().all(); // список групп после создания новой
+    Groups after = app.db().groups(); // список групп после создания новой
     assertThat(after.size(), equalTo(before.size()+1)); // сравнение количества до и после вариант 2
     assertThat(after, equalTo(before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
     //app.goTo().gotoHome();
