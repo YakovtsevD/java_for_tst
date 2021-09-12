@@ -3,16 +3,35 @@ package ru.stqa.pft.model;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.Type;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @XStreamAlias("group")
+@Entity  //объявляет, что класс привязан к базе (для hibernate)
+@Table(name = "group_list")  //указываем таблицу
+
 public class GroupData {
   @XStreamOmitField //аннотация НЕ выгружать поле id XML
+  @Id //привязка атрибута Id из GroupData к колонке
+  @Column(name="group_id") //указываем имя колонки
   private int id;
+
   @Expose
+  @Column(name="group_name") //указываем имя колонки
   private String name;
+
   @Expose
+  @Type(type="text")
+  @Column(name="group_header") //указываем имя колонки
   private String header;
+
   @Expose
+  @Type(type="text")
+  @Column(name="group_footer") //указываем имя колонки
   private String footer;
 
   /*
