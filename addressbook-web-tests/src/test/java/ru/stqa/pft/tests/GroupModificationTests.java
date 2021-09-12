@@ -13,10 +13,11 @@ public class GroupModificationTests extends TestBase {
 
   @BeforeMethod  // перед каждым тестом в классе будет проверка есть ли группа (с созданием, если групп нет)
   public void ensurePreConditions() {
+    if (app.db().groups().size() == 0) {
     app.goTo().groupPage();
     //if (! app.group().isThereAGroup()) {
-    if (app.group().all().size()==0) {
-      app.group().create(new GroupData().withName("test1").withHeader("header1").withFooter("footer1"));
+    //if (app.group().all().size()==0) {
+    app.group().create(new GroupData().withName("test1").withHeader("header1").withFooter("footer1"));
     }
   }
 
@@ -25,13 +26,15 @@ public class GroupModificationTests extends TestBase {
 
     app.goTo().groupPage();
 
-    Groups before = app.group().all();
+    //Groups before = app.group().all();
+    Groups before = app.db().groups();
     GroupData modifiedGroup = before.iterator().next();
     GroupData group = new GroupData()
             .withId(modifiedGroup.getId()).withName("modgroup6").withHeader("header6").withFooter("footer6");
     app.group().modify(group);
     Assert.assertEquals(app.group().count(), before.size()); // быстрая проверка количества без загрузки списка групп after
-    Groups after = app.group().all();
+    //Groups after = app.group().all();
+    Groups after = app.db().groups();
 
     //Assert.assertEquals(after.size(), before.size());
 
