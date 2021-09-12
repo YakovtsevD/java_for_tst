@@ -3,33 +3,63 @@ package ru.stqa.pft.model;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.Type;
+import org.hibernate.grammars.hql.HqlParser;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import javax.swing.*;
 import java.io.File;
 
 @XStreamAlias("contact")
+@Entity
+@Table(name = "addressbook")
 public class ContactData {
   @XStreamOmitField //аннотация НЕ выгружать поле id XML
+  @Id
+  @Column(name = "id") //указываем имя колонки
   private int id;
+
   @Expose
+  @Column(name = "firstname")
+  //указываем имя колонки, если сопадает название идентификатора и имя колонки, то можно не указывать
   private String firstname;
+
   @Expose
+  @Column(name = "lastname")
   private String lastname;
+
+  @Transient
   private String group;
+
+  @Column(name = "home")
+  @Type(type = "text")
   private String homePhone;
+  @Column(name = "mobile")
+  @Type(type = "text")
   private String mobilePhone;
+  @Column(name = "work")
+  @Type(type = "text")
   private String workPhone;
+  @Transient
   private String allPhones;
+
   @Expose
+  @Column(name = "address")
+  @Type(type = "text")
   private String address;
+
+  @Type(type = "text")
   private String email;
+  @Type(type = "text")
   private String email2;
+  @Type(type = "text")
   private String email3;
+  @Transient
   private String allEmails;
-  private File photo;
+
+  @Column(name = "photo")
+  @Type(type = "text")
+  private String photo;
 
   // переопределение стандартных методов под работу с объектами ContactData
   @Override
@@ -43,6 +73,7 @@ public class ContactData {
     if (firstname != null ? !firstname.equals(that.firstname) : that.firstname != null) return false;
     return lastname != null ? lastname.equals(that.lastname) : that.lastname == null;
   }
+
   @Override
   public int hashCode() {
     int result = id;
@@ -50,6 +81,7 @@ public class ContactData {
     result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
     return result;
   }
+
   @Override
   public String toString() {
     return "ContactData{" +
@@ -89,7 +121,9 @@ public class ContactData {
     return email;
   }
 
-  public String getGroup() { return group; }
+  public String getGroup() {
+    return group;
+  }
 
   public int getId() {
     return id;
@@ -128,13 +162,12 @@ public class ContactData {
   }
 
   public File getPhoto() {
-    return photo;
+    return new File(photo);
   }
 
 
-
   public ContactData withPhoto(File photo) {
-    this.photo = photo;
+    this.photo = photo.getPath();
     return this;
   }
 
@@ -202,10 +235,4 @@ public class ContactData {
     this.allEmails = allEmails;
     return this;
   }
-
-
-
-
-
 }
-

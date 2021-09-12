@@ -5,7 +5,7 @@
 
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-            <level>INFO</level>
+            <level>DEBUG</level>
         </filter>
         <file>testFile-${bySecond}.log</file>
         <!-- <append>true</append> -->
