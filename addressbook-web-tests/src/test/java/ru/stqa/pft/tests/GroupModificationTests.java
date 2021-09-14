@@ -49,6 +49,8 @@ public class GroupModificationTests extends TestBase {
     //Assert.assertEquals(before, after);
     assertThat(after, equalTo(before.without(modifiedGroup)));
 
+    verifyGroupListInUI();
+
     app.goTo().gotoHome();
     //app.getSessionHelper().logout();
   }
