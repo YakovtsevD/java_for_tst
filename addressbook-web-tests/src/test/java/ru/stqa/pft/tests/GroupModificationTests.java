@@ -38,7 +38,7 @@ public class GroupModificationTests extends TestBase {
 
     //Assert.assertEquals(after.size(), before.size());
 
-    //т.к. после модификации порядок групп может измениться из-за сортировки по наименования, сравнивать надо неупорядоченные множества
+    //т.к. после модификации порядок групп может измениться из-за сортировки по наименованиям, сравнивать надо неупорядоченные множества
     //before.remove(modifiedGroup);
     before.add(group);
     //Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after)); // это сравнение неупорядоченных списков

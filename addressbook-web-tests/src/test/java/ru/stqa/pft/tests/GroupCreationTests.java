@@ -68,7 +68,7 @@ public class GroupCreationTests extends TestBase {
     }
   }
 
-  @Test (dataProvider = "validGroupsXml")
+  @Test (dataProvider = "validGroupsJson")
   //public void testGroupCreation(String name, String header, String footer) {
   public void testGroupCreation(GroupData group) {
     app.goTo().groupPage();
@@ -80,7 +80,10 @@ public class GroupCreationTests extends TestBase {
     Groups after = app.db().groups(); // список групп после создания новой
     assertThat(after.size(), equalTo(before.size()+1)); // сравнение количества до и после вариант 2
     assertThat(after, equalTo(before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
-    //app.goTo().gotoHome();
+
+    verifyGroupListInUI();
+
+    app.goTo().gotoHome();
   }
 
   @Test (enabled = false)

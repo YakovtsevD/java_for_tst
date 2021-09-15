@@ -35,6 +35,8 @@ public class GroupDeletionTests extends TestBase {
     //Assert.assertEquals(before, after);
     assertThat(after, equalTo(before.without(deletedGroup)));
 
+    verifyGroupListInUI();
+
     app.goTo().gotoHome(); // на страницу хоум
     //app.getSessionHelper().logout(); // разлогин
   }
