@@ -9,6 +9,8 @@ import org.hibernate.grammars.hql.HqlParser;
 import javax.persistence.*;
 import javax.swing.*;
 import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
 
 @XStreamAlias("contact")
 @Entity
@@ -60,6 +62,15 @@ public class ContactData {
   @Column(name = "photo")
   @Type(type = "text")
   private String photo;
+
+  @ManyToMany (fetch = FetchType.EAGER) // выгружать больше инфы, чтобы можно было не держать сессию открытой
+  @JoinTable(name="address_in_groups", joinColumns = @JoinColumn(name="id"), inverseJoinColumns = @JoinColumn(name="group_id"))
+  private Set<GroupData> groups = new HashSet<GroupData>();
+
+  public Groups getGroups() {
+    return new Groups(groups);
+  }
+
 
   // переопределение стандартных методов под работу с объектами ContactData
   @Override
@@ -193,7 +204,7 @@ public class ContactData {
 
   public ContactData withGroup(String group) {
     this.group = group;
-    return this;
+   return this;
   }
 
   public ContactData withHomePhone(String home) {
@@ -233,6 +244,11 @@ public class ContactData {
 
   public ContactData withAllEmails(String allEmails) {
     this.allEmails = allEmails;
+    return this;
+  }
+
+  public ContactData inGroup(GroupData group) {
+    groups.add(group);
     return this;
   }
 }

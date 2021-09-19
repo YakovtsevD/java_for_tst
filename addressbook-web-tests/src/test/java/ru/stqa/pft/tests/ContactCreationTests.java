@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.model.ContactData;
 import ru.stqa.pft.model.Contacts;
 import ru.stqa.pft.model.GroupData;
+import ru.stqa.pft.model.Groups;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -74,11 +75,12 @@ public class ContactCreationTests extends TestBase {
 
   @Test (dataProvider = "validContactsCsv")
   public void testContactCreation(ContactData contact) {
-    app.goTo().gotoHome();
+    Groups groups = app.db().groups();
     Contacts before = app.contact().all();  //выгружаем список контактов ДО
-    //File photo = new File("src/test/resources/stru.png");
+    File photo = new File("src/test/resources/stru.png");
     //ContactData contact = new ContactData().withFirstname("Aon").withLastname("Aarobensson").withEmail("aon@tut.by").withPhoto(photo); // создаем объекти контакта который добавляем
-    app.contact().create(contact);
+    app.goTo().gotoHome();
+    app.contact().create(contact.withPhoto(photo).inGroup(groups.iterator().next()));
     assertThat(app.contact().count(), equalTo(before.size()+1)); // сравниваем количество записей (count) до загрузки списка повторно, ловим ошибку раньше
     Contacts after = app.contact().all();  // выгружаем лист для сравнения после создания
     //assertThat(after.size(), equalTo(before.size()+1));
@@ -101,7 +103,8 @@ public class ContactCreationTests extends TestBase {
 
     app.goTo().gotoHome();
     Contacts before = app.contact().all();  //выгружаем список контактов ДО
-    ContactData contact = new ContactData().withFirstname("Ben").withLastname("Bensson'").withEmail("ben@tut.by").withGroup("newgroup777"); // создаем объекти контакта который добавляем
+    //ContactData contact = new ContactData().withFirstname("Ben").withLastname("Bensson'").withEmail("ben@tut.by").withGroup("newgroup777"); // создаем объекти контакта который добавляем
+    ContactData contact = new ContactData().withFirstname("Ben").withLastname("Bensson'").withEmail("ben@tut.by"); // создаем объекти контакта который добавляем
     app.contact().create(contact);
     assertThat(app.contact().count(), equalTo(before.size())); // сравниваем количество записей (count) до загрузки списка повторно, ловим ошибку раньше
     Contacts after = app.contact().all();  // выгружаем лист для сравнения после создания

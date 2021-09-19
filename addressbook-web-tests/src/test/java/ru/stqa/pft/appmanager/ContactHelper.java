@@ -29,8 +29,9 @@ public class ContactHelper extends HelperBase {
     type(By.name("address"), contactData.getAddress());
     attach(By.name("photo"), contactData.getPhoto()); // функция attach не содержит клика на элементе выбора фото, т.к. откроется окно выбора файла и тест зависнет
     if (creation) {
-      if (contactData.getGroup() != null) {
-        new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup()); //выбор элементов из выпадающено списка
+      if (contactData.getGroups().size() > 0) {
+        Assert.assertTrue(contactData.getGroups().size()==1);
+        new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroups().iterator().next().getName()); //выбор элементов из выпадающено списка
       }
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));

@@ -16,6 +16,7 @@ public class ContactModificationTests extends TestBase {
     //if (!app.contact().isThereAContact()) {
     if (app.contact().all().size()==0) {
       app.contact().create(new ContactData().withFirstname("Ivana").withLastname("Ivanova").withEmail("iva@tut.by").withGroup("newgroup777"));
+      //app.contact().create(new ContactData().withFirstname("Ivana").withLastname("Ivanova").withEmail("iva@tut.by"));
     }
   }
 

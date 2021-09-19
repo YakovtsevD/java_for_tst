@@ -56,13 +56,17 @@ public class HbConnectionTest {
         //3680 [main] DEBUG o.h.q.h.i.SemanticQueryBuilder - Encountered implicit select clause : fromContactDatawheredeprecated=0000-00-00 00:00:00
         //3686 [main] DEBUG org.hibernate.orm.query.hql - Unable to resolve unqualified attribute [deprecated] in local from-clause
         //3687 [main] DEBUG o.h.r.t.b.j.i.JdbcResourceLocalTransactionCoordinatorImpl - JDBC transaction marked for rollback-only (exception provided for stack trace)
-        List<ContactData> result = session.createQuery( "from ContactData where deprecated = '0000-00-00'").list();
-        //List<ContactData> result = session.createQuery( "from ContactData where lastname like 'Sadko'").list();
-        for (ContactData contact : result) {
-            System.out.println(contact);
-        }
+        //List<ContactData> result = session.createQuery( "from ContactData where deprecated = '0000-00-00'").list();
+
+        List<ContactData> result = session.createQuery( "from ContactData where lastname like 'Sadko'").list();
         session.getTransaction().commit();
         session.close();
+
+        for (ContactData contact : result) {
+            System.out.println(contact);
+            System.out.println(contact.getGroups());
+        }
+
 
     }
 
