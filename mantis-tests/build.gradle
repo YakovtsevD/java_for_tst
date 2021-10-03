@@ -8,11 +8,14 @@ dependencies {
     implementation 'org.testng:testng:7.4.0'
     implementation 'org.seleniumhq.selenium:selenium-java:4.0.0-beta-4'
     implementation 'org.hamcrest:java-hamcrest:2.0.0.0'
+    implementation 'org.apache.httpcomponents:httpcomponents-client:4.5.13'
+    implementation 'com.github.alotuser:httpclients:1.7.7'
+    implementation 'org.slf4j:slf4j-nop:2.0.0-alpha4'
 }
 
 test {
     useTestNG {
-        suites 'src/test/resource/testng.xml'
+        //suites 'src/test/resource/testng.xml'
     }
     if (project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
