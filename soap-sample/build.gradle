@@ -1,0 +1,44 @@
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.testng:testng:7.4.0'
+    //implementation group: 'no.nils.wsdl2java', name: 'no.nils.wsdl2java.gradle.plugin', version: '0.9', ext: 'pom'
+    //implementation 'com.github.janisz:wsdl2java:0.0.1'
+}
+
+test {
+    useTestNG()
+}
+
+buildscript {
+    repositories {
+       gradlePluginPortal()
+       maven {
+           url "https://plugins.gradle.org/m2/"
+        }
+        mavenCentral()
+    }
+    dependencies {
+        classpath "com.yupzip:wsdl2java:2.2.0"
+        //classpath 'no.nils:wsdl2java:0.10'
+    }
+}
+
+//apply plugin: 'no.nils.wsdl2java'
+apply plugin: "com.yupzip.wsdl2java"
+
+wsdl2java {
+    generatedWsdlDir = file("src/main/java")  //directory for generated source code
+    wsdlDir = file("src/main/resources") // define to support incremental build
+    wsdlsToGenerate = [   //  2d-array of wsdls and cxf-parameters
+                          [//'-p', 'com.acme.mypackage', '-autoNameResolution',
+                           'src/main/resources/geoipservice.wsdl'],
+    ]
+    //locale = Locale.GERMANY
+    //cxfVersion = "2.5.1"
+    //cxfPluginVersion = "2.4.0"
+}
