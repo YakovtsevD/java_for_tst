@@ -1,0 +1,94 @@
+\Lessons Java for testers\01 занятие\01 Обзор языков программирования и место Java в общей картине мира.mp4
+\Lessons Java for testers\01 занятие\02 Установка и настройка Java SDK.mp4
+\Lessons Java for testers\01 занятие\03 Первая работающая программа на языке Java.mp4
+\Lessons Java for testers\01 занятие\04 Хранение кода Git и GitHub.mp4
+\Lessons Java for testers\01 занятие\05 Gradle и другие сборщики.mp4
+\Lessons Java for testers\01 занятие\06 Среда разработки IntelliJ IDEA.mp4
+\Lessons Java for testers\01 занятие\07 Классы и пакеты файлы и директории.mp4
+\Lessons Java for testers\01 занятие\08 Фигурные скобочки и структура программного кода.mp4
+\Lessons Java for testers\01 занятие\09 Выражения и операции.mp4
+\Lessons Java for testers\01 занятие\10 Переменные и значения.mp4
+\Lessons Java for testers\01 занятие\11 Типы переменных и значений.mp4
+\Lessons Java for testers\01 занятие\12 Среда разработки Запуск программы режиме отладки.mp4
+\Lessons Java for testers\01 занятие\13 Функции.mp4
+\Lessons Java for testers\01 занятие\14 Классы и объекты.mp4
+\Lessons Java for testers\01 занятие\15 Методы Функции ассоциированные с объектами.mp4
+\Lessons Java for testers\02 занятие\16 Немного теории что такое автотесты.mp4
+\Lessons Java for testers\02 занятие\17 Gradle подключаем зависимости от дополнительных библиотек.mp4
+\Lessons Java for testers\02 занятие\18 Делаем первый тест используя фреймворк для запуска тестов TestNG.mp4
+\Lessons Java for testers\02 занятие\19 Среда разработки IDEA полезные клавиатурные сочетания.mp4
+\Lessons Java for testers\02 занятие\20 Делаем тест для вебприложения используя драйвер Selenium.mp4
+\Lessons Java for testers\02 занятие\21 Фикстуры инициализация и зачистка.mp4
+\Lessons Java for testers\02 занятие\22 Рефакторинг улучшаем читаемость кода выделяем вспомогательные методы.mp4
+\Lessons Java for testers\02 занятие\23 Создам общий базовый класс для тестов где можно хранить методы общие для всех тестов.mp4
+\Lessons Java for testers\02 занятие\24 Заменяем наследование на делегирование и создам двухуровневую архитектуру.mp4
+\Lessons Java for testers\02 занятие\25 Выделяем специализированные классыпомощники.mp4
+\Lessons Java for testers\02 занятие\26 Создам общий базовый класс для классовпомощников.mp4
+\Lessons Java for testers\02 занятие\27 Делаем новый тест без использования рекордера.mp4
+\Lessons Java for testers\03 занятие\28 Проверка условий при помощи конструкции ifthenelse.mp4
+\Lessons Java for testers\03 занятие\29 Полная форма ifthenelse Неполная форма ifthen Вложенные проверки Свртка вложенных проверок.mp4
+\Lessons Java for testers\03 занятие\30 Запуск тестов в разных браузерах.mp4
+\Lessons Java for testers\03 занятие\31 Сравнение объектов при помощи оператора  и метода equals.mp4
+\Lessons Java for testers\03 занятие\32 Оптимизация заполнения форм  оставляем дефолтные значения в полях.mp4
+\Lessons Java for testers\03 занятие\33 Оптимизация заполнения форм  оставляем не изменяющися значения в полях.mp4
+\Lessons Java for testers\03 занятие\34 Перехват исключений.mp4
+\Lessons Java for testers\03 занятие\35 Заполнение форм с почти одинаковым набором полей.mp4
+\Lessons Java for testers\03 занятие\36 Ленивые действия.mp4
+\Lessons Java for testers\03 занятие\37 Проверка и обеспечение выполнения предусловий.mp4
+\Lessons Java for testers\04 занятие\38 ЦиклыМногократные повторения похожих действий.mp4
+\Lessons Java for testers\04 занятие\39 Коллекции Наборы элементов.mp4
+\Lessons Java for testers\04 занятие\40 Количество элементов в коллекции.mp4
+\Lessons Java for testers\04 занятие\41 Выбор элемента списка по порядковому номеру.mp4
+\Lessons Java for testers\04 занятие\42 Формирование коллекции.mp4
+\Lessons Java for testers\04 занятие\43 Сравнение коллекций.mp4
+\Lessons Java for testers\04 занятие\44 Множества Неупорядоченные коллекции.mp4
+\Lessons Java for testers\04 занятие\45 Поиск максимального элемента в коллекции.mp4
+\Lessons Java for testers\04 занятие\46 Лямбдавыражения анонимные функции и элементы функционального программирования.mp4
+\Lessons Java for testers\04 занятие\47 Сортировка списков.mp4
+\Lessons Java for testers\05 занятие\48 Как правильно запускать браузер.mp4
+\Lessons Java for testers\05 занятие\49 Улучшение кода тестов  ещ немного реструктуризации кода.mp4
+\Lessons Java for testers\05 занятие\50 Улучшение названий методов.mp4
+\Lessons Java for testers\05 занятие\51 Fluentинтерфейсы.mp4
+\Lessons Java for testers\05 занятие\52 Повсеместное использование уникальных идентификаторов объектов.mp4
+\Lessons Java for testers\05 занятие\53 Hamcrest  улучшение внешнего вида проверок.mp4
+\Lessons Java for testers\05 занятие\54 Кеширование результатов длительных операций.mp4
+\Lessons Java for testers\05 занятие\55 Хеширование и предварительные проверки.mp4
+\Lessons Java for testers\05 занятие\56 Способы построения сложных локаторов.mp4
+\Lessons Java for testers\05 занятие\57 Режем строки и немного про регулярные выражения.mp4
+\Lessons Java for testers\05 занятие\58 Клеим строки  метод обратных проверок.mp4
+\Lessons Java for testers\06 занятие\59 Пути к файлам и директориям.mp4
+\Lessons Java for testers\06 занятие\60 Генератор тестовых данных запись данных в файл.mp4
+\Lessons Java for testers\06 занятие\61 Анализ опций командой строки при запуске генератора данных.mp4
+\Lessons Java for testers\06 занятие\62 Параметризация тестовых методов.mp4
+\Lessons Java for testers\06 занятие\63 Загрузка тестовых данных из файла.mp4
+\Lessons Java for testers\06 занятие\64 Формат XML.mp4
+\Lessons Java for testers\06 занятие\65 Формат JSON.mp4
+\Lessons Java for testers\06 занятие\66 Автоматическое закрытие файлов после использования.mp4
+\Lessons Java for testers\06 занятие\67 Конфигурационные файлы для описания тестовых наборов.mp4
+\Lessons Java for testers\06 занятие\68 Описание конфигурации тестового стенда.mp4
+\Lessons Java for testers\06 занятие\69 Протоколирование логфайлы.mp4
+\Lessons Java for testers\07 занятие\70 Драйвер базы данных Получение данных из БД.mp4
+\Lessons Java for testers\07 занятие\71 Object Relational Mapping ORM.mp4
+\Lessons Java for testers\07 занятие\72 Условия отбора данных.mp4
+\Lessons Java for testers\07 занятие\73 Сравнение данных загруженных из БД.mp4
+\Lessons Java for testers\07 занятие\74 Отключаемые проверки UI.mp4
+\Lessons Java for testers\07 занятие\75 Связи между объектами.mp4
+\Lessons Java for testers\08 занятие\76 Установка нового учебного приложения MantisBT.mp4
+\Lessons Java for testers\08 занятие\77 Подготовка проекта для тестирования MantisBT.mp4
+\Lessons Java for testers\08 занятие\78 Прямое взаимодействие с сервером по протоколу HTTP.mp4
+\Lessons Java for testers\08 занятие\79 Ленивая инициализация помощников.mp4
+\Lessons Java for testers\08 занятие\80 Передача файлов на удалнную машину по протоколу FTP.mp4
+\Lessons Java for testers\08 занятие\81 Получение почты на встроенный в тесты почтовый сервер.mp4
+\Lessons Java for testers\08 занятие\82 James, Telnet.mp4
+\Lessons Java for testers\09 занятие\83 Немного теории про Remote API.mp4
+\Lessons Java for testers\09 занятие\84 SOAP  простой пример.mp4
+\Lessons Java for testers\09 занятие\85 SOAP  взаимодействие с MantisBT.mp4
+\Lessons Java for testers\09 занятие\86 REST  взаимодействие с Bugify.mp4
+\Lessons Java for testers\09 занятие\87 RestAssured  использовать или нет.mp4
+\Lessons Java for testers\09 занятие\88 REST  взаимодействие с GitHub.mp4
+\Lessons Java for testers\10 занятие\89 Сервер непрерывной интеграции.mp4
+\Lessons Java for testers\10 занятие\90 Удалнный запуск браузера Selenium Server.mp4
+\Lessons Java for testers\10 занятие\91 Конфигурационное тестирование Selenium Grid.mp4
+\Lessons Java for testers\10 занятие\92 Генерация отчтов при помощи Allure.mp4
+\Lessons Java for testers\10 занятие\93 Keyword Driven Testing и инструмент Robot Framework.mp4
+\Lessons Java for testers\10 занятие\94 Behaviour Driven Testing и инструмент CucumberJVM.mp4
