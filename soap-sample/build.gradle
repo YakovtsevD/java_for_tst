@@ -6,8 +6,6 @@ repositories {
 
 dependencies {
     implementation 'org.testng:testng:7.4.0'
-    //implementation group: 'no.nils.wsdl2java', name: 'no.nils.wsdl2java.gradle.plugin', version: '0.9', ext: 'pom'
-    //implementation 'com.github.janisz:wsdl2java:0.0.1'
 }
 
 test {
